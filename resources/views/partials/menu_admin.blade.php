@@ -304,7 +304,7 @@
                         <?php $tipo_p = Session::get('tipo_persona'); ?>
                         @if($tipo_p== 2)
                             <ul class="nav navbar-nav" style="">
-                                <li class="dropdown"><a href="{{url('tutorias/')}}">Tutorias</a></li>
+                                <li class="dropdown"><a href="{{url('tutorias/')}}">Tutorias.</a></li>
                             </ul>
                         @endif
                         @if($id_unidad_admin ==true)
