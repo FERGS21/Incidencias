@@ -416,7 +416,7 @@
                                         <li><a href="{{url('/alumnos_actividades')}}">Liberar Solicitud Alumnos</a></li>
                                         <li><a href="{{url('/libera_planeacion')}}">Liberar Planeación Docente</a></li>
                                         <li><a href="{{url('/constancias')}}">Constancia Individual</a></li>
-                                        <li><a href="{{url('/constancia_gen')}}">Constancia General</a></li>
+                                        <li><a href="{{url('/constancia_gen')}}">Constancia General..</a></li>
                                         {{--     <li><a href="{{url('/datos_historicos')}}">Datos Históricos.</a></li> --}}
                                     </ul>
                                 </li>
