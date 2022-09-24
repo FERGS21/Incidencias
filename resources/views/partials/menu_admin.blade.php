@@ -464,7 +464,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{url('/formatos/distribucion')}}">Distrib.de hrs. frente a
                                                 grupo</a></li>
-                                        <li><a href="{{url('/formatos/relacion')}}">Relación de personal docente</a>
+                                        <li><a href="{{url('/formatos/relacion')}}">Relación35 de personal docente</a>
                                         </li>
                                     </ul>
                                 </li>
