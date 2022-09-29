@@ -377,6 +377,7 @@
                                     </ul>
                                 </li>
                             </ul>
+                            
                             <ul class="nav navbar-nav navbar-left">
                                 <li class="dropdown">
                                 <li><a href="{{url('/oficios/evaluacion')}}">Validar Oficios </a></li>
@@ -389,6 +390,18 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{url('/departamento/plantilla')}}">Agregar Plantilla</a></li>
                                         <li><a href="{{url('/departamentoplantilla/ver')}}">Ver Plantilla</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown bloqueo">
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
+                                   class="caret"> </span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="{{url('/incidencia/veroficio')}}">Ver oficio</a></li>
+                                        <li><a href="{{url('/incidencia/verevidencia')}}">Ver evidencia</a></li>
                                     </ul>
                                 </li>
 
@@ -512,7 +525,18 @@
                                     </ul>
                                 </li>
                             </ul>
+                         
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown bloqueo">
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
+                                   class="caret"> </span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="{{url('/incidencia/veroficio')}}">Ver oficio</a></li>
+                                    </ul>
+                                </li>
 
+                            </ul>
                         @endif
 
                     <!--MENU DESARROLLO ACADEMICO-->
@@ -749,6 +773,17 @@
                                         <li><a href="/docente/{{ $usuario }}/edit">Editar</a></li>
                                     </ul>
                                 </li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown bloqueo">
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
+                                   class="caret"> </span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="{{url('/incidencia/veroficio')}}">Ver oficio</a></li>
+                                    </ul>
+                                </li>
+
                             </ul>
                             <ul class="nav navbar-nav navbar-left tres">
                                 <li class="dropdown">
