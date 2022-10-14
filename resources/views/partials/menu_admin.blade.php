@@ -237,18 +237,7 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown bloqueo">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
-                                   class="caret"> </span></a>
-                                   <ul class="dropdown-menu">
-                                        <li><a href="{{url('/incidencia/veroficio')}}">Solicitar oficio</a></li>
-                                        <li><a href="{{url('/incidencia/verevidencia')}}">Subir evidencia</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
+                            
                             @if($seguimiento_asesor==true)
                                 <ul class="nav navbar-nav">
                                     <li class="dropdown"><a href="/residencia/seguimiento_asesor">Seguimiento de
@@ -330,6 +319,18 @@
                                 </ul>
                             @endif
                         @endif
+                        <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown bloqueo">
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
+                                   class="caret"> </span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="{{url('/create')}}">Solicitar oficio</a></li>
+                                        <li><a href="{{url('/')}}">Ver evidencia</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
                     <!-- MENU JEFE de computo-->
                         @if($jefe_computo==true)
 
