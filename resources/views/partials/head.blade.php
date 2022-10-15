@@ -9,7 +9,6 @@
             
              <label href="{{ URL::asset ('assets/img/gem.png') }}" target="_blank"><img id="logo1" src="{{ URL::asset ('assets/img/gem.png') }}" /></label>
 
-
             </div>
 
 
@@ -33,4 +32,5 @@
          $(document).ready(function(){
     });
  </script>
+
  @endsection

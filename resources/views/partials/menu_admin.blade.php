@@ -318,6 +318,18 @@
                                 </ul>
                             @endif
                         @endif
+                        <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown bloqueo">
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
+                                   class="caret"> </span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="{{url('/create')}}">Solicitar oficio</a></li>
+                                        <li><a href="{{url('/')}}">Ver evidencia</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
                     <!-- MENU JEFE de computo-->
                         @if($jefe_computo==true)
 
@@ -394,18 +406,7 @@
                                 </li>
 
                             </ul>
-                            <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown bloqueo">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
-                                   class="caret"> </span></a>
-                                   <ul class="dropdown-menu">
-                                        <li><a href="{{url('/incidencia/veroficio')}}">Ver oficio</a></li>
-                                        <li><a href="{{url('/incidencia/verevidencia')}}">Ver evidencia</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
+            
                         @endif
                     <!-- MENU JEFE division-->
                         @if($jefe_division==true)
@@ -434,8 +435,6 @@
                                     </ul>
                                 </li>
                             </ul>
-
-
                             <ul class="nav navbar-nav navbar-left">
                                 <li class="dropdown bloqueo">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
@@ -477,7 +476,7 @@
                                     <ul class="dropdown-menu">
                                         <li><a href="{{url('/formatos/distribucion')}}">Distrib.de hrs. frente a
                                                 grupo</a></li>
-                                        <li><a href="{{url('/formatos/relacion')}}">Relación35 de personal docente</a>
+                                        <li><a href="{{url('/formatos/relacion')}}">Relación de personal docente</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -526,17 +525,7 @@
                                 </li>
                             </ul>
                          
-                            <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown bloqueo">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
-                                   class="caret"> </span></a>
-                                   <ul class="dropdown-menu">
-                                        <li><a href="{{url('/incidencia/veroficio')}}">Ver oficio</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
+                            
                         @endif
 
                     <!--MENU DESARROLLO ACADEMICO-->

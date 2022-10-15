@@ -22,7 +22,7 @@ class PDF extends FPDF
     //PIE DE PAGINA
     function Footer()
     {
-        if (count($this->pages) === 1) {
+        if (count($this->pages) === 1) {-
             $this->SetY(-25);
             $this->SetFont('Arial', '', 6);
             $this->Cell(100);
