@@ -274,7 +274,7 @@ FROM `ti_requisitos_titulacion` WHERE `id_alumno` = '.$id_alumno.' AND `id_estad
             }
             else
             {
-
+                Session::put('personal_tesvb',true);
 
                 /** Riegos **/
 

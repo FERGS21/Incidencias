@@ -318,18 +318,7 @@
                                 </ul>
                             @endif
                         @endif
-                        <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown bloqueo">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
-                                   class="caret"> </span></a>
-                                   <ul class="dropdown-menu">
-                                        <li><a href="{{url('/create')}}">Solicitar oficio</a></li>
-                                        <li><a href="{{url('/')}}">Ver evidencia</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
+                        
                     <!-- MENU JEFE de computo-->
                         @if($jefe_computo==true)
 
@@ -1441,11 +1430,23 @@
 
                                           </ul>
                                    @endif
+<?php   $personal_tesvb=Session::get('personal_tesvb');?>
+@if( $personal_tesvb == true)
+                                   <ul class="nav navbar-nav navbar-left">
+                                <li class="dropdown bloqueo">
+                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
+                                   class="caret"> </span></a>
+                                   <ul class="dropdown-menu">
+                                        <li><a href="{{url('/incidencias/solicitar_oficio')}}">Solicitar oficio</a></li>
+                                        <li><a href="{{url('/incidencias/cargar_evidencia')}}">Ver evidencia</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
 
 
-
-
-
+@endif
                   </div>
 
 

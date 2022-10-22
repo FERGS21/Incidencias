@@ -1,7 +1,5 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Codedge\Fpdf\Fpdf\Fpdf as FPDF;
 use Illuminate\Support\Facades\DB;
@@ -667,6 +665,17 @@ and gnral_municipios.id_estado=gnral_estados.id_estado and oc_depend_domicilio.i
                     $pdf->Cell(40);
                     $pdf->MultiCell(60, 4, utf8_decode('Fecha, Hora y Firma de Recepcion del servidor Publico Comisionado'), 0, 'C', 0);
                     $pdf->Ln(0);
+
+
+
+
+
+
+
+
+
+
+                    
                     $pdf->SetFont('Arial', 'B', '8');
                     $pdf->MultiCell(60, 4, utf8_decode($adcripcion), 0, 'C', 0);
 
