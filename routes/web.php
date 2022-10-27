@@ -1714,7 +1714,7 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get ('/incidencias/solicitar_oficio','IncidenciasController@vista');
-    Route::post ('/incidencias/guardar_oficio','IncidenciasController@guardar_oficio');
+    //Route::post ('/incidencias/guardar_oficio','IncidenciasController@guardar_oficio');
     Route::get ('/incidencias/cargar_evidencia','IncidenciasController@vista2');
     Route::post ('/incidencias/guardar_evidencia','IncidenciasController@guardar_evidencia');
     ///

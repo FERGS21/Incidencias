@@ -44,12 +44,23 @@
     <div class="row" style="display: inline" id="subir">
                 <br>
                 <div class="col-md-4 col-md-offset-5 m">
-                    <button id="subir_evidencia" type="submit" class="btn btn-success btn-lg">Subir evidencia</button>
+                    <button id="subir_evidencia" type="submit" class="btn btn-success btn-lg"> Guardar evidencia</button>
                 </div>
 
             </div>
  </form>
 </div>
-</div>	            
+</div>	
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
+</script>
+<script>
+  Swal.fire({
+  position: 'center',
+  icon: 'success',
+  title: 'Tu evidencia a sido enviada con éxito ',
+  showConfirmButton: false,
+  timer: 1500
+});
+</script>            
 </main>
 @endsection

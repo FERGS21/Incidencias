@@ -758,7 +758,7 @@
                                    aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
                                    class="caret"> </span></a>
                                    <ul class="dropdown-menu">
-                                        <li><a href="{{url('/incidencia/veroficio')}}">Ver oficio</a></li>
+                                        <li><a href="{{url('/incidencia/subir_oficio')}}">Ver oficio</a></li>
                                     </ul>
                                 </li>
 
@@ -1439,7 +1439,7 @@
                                    class="caret"> </span></a>
                                    <ul class="dropdown-menu">
                                         <li><a href="{{url('/incidencias/solicitar_oficio')}}">Solicitar oficio</a></li>
-                                        <li><a href="{{url('/incidencias/cargar_evidencia')}}">Ver evidencia</a></li>
+                                        <li><a href="{{url('/incidencias/cargar_evidencia')}}">Subir evidencia</a></li>
                                     </ul>
                                 </li>
 
