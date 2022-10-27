@@ -140,7 +140,7 @@
 {{------BOTON---}}
 <div class="row" style="display: inline" id="solicitar">
                 <div class="col-md-2 col-md-offset-4">
-                    <button id="guardar_solicitud" type="submit" class="btn btn-success btn-lg" >Guardar</button>
+                    <button id="guardar_solicitud" type="submit" class="btn btn-success btn-lg">Guardar</button>
                
                   </div>
                 <div class="col-md-2 col-md-offset-1">
@@ -268,18 +268,6 @@
                 });
                 
   });
-</script>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  Swal.fire({
-  position: 'center',
-  icon: 'success',
-  title: 'Tu solicitud de oficio a sido enviada con éxito ',
-  showConfirmButton:true,
-  timer: 1500
-  });
-
 </script>
 </main>
 @endsection
