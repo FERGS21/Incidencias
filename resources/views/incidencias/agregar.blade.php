@@ -72,7 +72,7 @@
                      </div>
                      </div>
 <div class="col-md-3 col-md-offset-1">
-    <label for="fecha_tervac">.Fecha de termino de  vacaciones</label>
+    <label for="fecha_tervac">Fecha de termino de  vacaciones</label>
                      <div class="form-group">
                          <input class="form-control datepicker fecha_tervac"   type="text"  id="fecha_tervac" name="fecha_tervac" data-date-format="yyyy/mm/dd" placeholder="AAAA/MM/DD" >
                      </div>
