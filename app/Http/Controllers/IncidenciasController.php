@@ -37,9 +37,23 @@ public function store(Request $request)
         $incidencias-> save();
         */
         Incidencias:: create($request->all());
-        
-
         return 'Completado';   
+    }
+    public function guardar_incidencia_solicitada(Request $request){
+        //dd($request);
+       $id_articulo = $request->input('id_articulo');
+       if($id_articulo ==2){
+        $fecha_req = $request->input('fecha_req');
+        $motivo_oficio = $request->input('motivo_oficio');
+
+        DB::table('inc_solicitudes')->insert([
+            'id_articulo' => $id_articulo,
+            'fecha_req' => $fecha_req,
+            'motivo_oficio' => $motivo_oficio,
+        ]);
+
+
+       }
     }
 
 }

@@ -1713,10 +1713,11 @@ Route::middleware('auth')->group(function () {
     Route::post('/presupuesto_anteproyecto/guardar_autorizacion_req_admin/','Pre_reg_req_adminController@guardar_autorizacion_req_admin');
 
 
-    Route::get ('/incidencias/solicitar_oficio','IncidenciasController@vista');
-    //Route::post ('/incidencias/guardar_oficio','IncidenciasController@guardar_oficio');
-    Route::get ('/incidencias/cargar_evidencia','IncidenciasController@vista2');
-    Route::post ('/incidencias/guardar_evidencia','IncidenciasController@guardar_evidencia');
+    Route::get('/incidencias/solicitar_oficio','IncidenciasController@vista');
+    Route::post('/incidencias/guardar_incidencia_solicitada','IncidenciasController@guardar_incidencia_solicitada');
+    Route::get('/incidencias/cargar_evidencia','IncidenciasController@vista2');
+    Route::post('/incidencias/guardar_evidencia','IncidenciasController@guardar_evidencia');
+    
     ///
 
 });

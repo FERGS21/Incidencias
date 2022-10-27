@@ -12,15 +12,9 @@
     </div>  
   </div>
   </div>
-  <form action="{{url("/incidencias/guardar_oficio")}}" method="POST" role="form" >
+  <form id="form_guardar_solicitud" action="{{url("/incidencias/guardar_incidencia_solicitada")}}" method="POST" role="form" >
+  {{ csrf_field() }}
   <div class="row">
-  <div class="col-md-8 col-md-offset-2">
-            <label>Motivo del oficio de incidencias </label>
-            <textarea class="form-control" id="id_motivo" name="motivo_oficio" rows="3" placeholder="Ingresa el motivo del (Utilizar letras mayusculas y minusculas), por ejemplo: Faltar 25 y 26 de Octubre" style=""></textarea>
-            </div>
-            </div>
-            
-<div class="row">
   <div class="col-md-3 col-md-offset-2">
     <div class= "dropdown">
         <label for="Tipo_of">Tipo de articulo/clausula aplicada </label>
@@ -35,10 +29,18 @@
             <div class="col-md-3 col-md-offset-2">
     <label for="fecha_req">Fecha requerida</label>
                      <div class="form-group">
-                         <input class="form-control datepicker fecha_req"   type="text"  id="fecha_r" name="fecha_req" data-date-format="yyyy/mm/dd" placeholder="AAAA/MM/DD" >
+                         <input class="form-control datepicker fecha_req"   type="text"  id="fecha_req" name="fecha_req" data-date-format="yyyy/mm/dd" placeholder="AAAA/MM/DD" >
                      </div>
                      </div>
             </div>
+  <div class="row">
+  <div class="col-md-8 col-md-offset-2">
+            <label>Motivo del oficio de incidencias </label>
+            <textarea class="form-control" id="motivo_oficio" name="motivo_oficio" rows="3" placeholder="Ingresa el motivo del (Utilizar letras mayusculas y minusculas), por ejemplo: Faltar 25 y 26 de Octubre" style=""></textarea>
+            </div>
+            </div>
+            
+
             {{-----------ARTICULO 64°-----------}}
 <div style="display: none;" id="articulo_64">
 <div class="row">
@@ -137,17 +139,18 @@
 {{------ARTICULO 69°------}}
 <div style="display: none;" id="articulo_69">
 </div>
-{{------BOTON---}}
+
+
+</form> 
 <div class="row" style="display: inline" id="solicitar">
                 <div class="col-md-2 col-md-offset-4">
-                    <button id="guardar_solicitud" type="submit" class="btn btn-success btn-lg" >Guardar</button>
+                    <button type="button"  id="enviar_solicitud"    class="btn btn-success btn-lg">Guardar</button>
                
                   </div>
                 <div class="col-md-2 col-md-offset-1">
                     <button id="imprimir_solicitud" type="submit" class="btn btn-success btn-lg">Imprimir</button>
               </div>
 
-</form> 
 </div>
 <script>
    $(document).ready( function() {
@@ -266,20 +269,64 @@
                 function (selected) {
                     $('.fecha_tervac').datepicker('setStartDate', getDate(selected));
                 });
+
+    $("#enviar_solicitud").click(function(){
+     
+      
+      var id_articulo = $('#id_articulo').val();
+     //alert (id_articulo);
+     if(id_articulo == null){
+      swal({
+        position: "top",
+        type: "error",
+        title: "Selecciona articulo",
+        showConfirmButton: false,
+        timer: 3500
+      });
+     }
+     else{
+      if(id_articulo == 2){
+        var fecha_req = $('#fecha_req').val();
+        if(fecha_req == ''){
+          swal({
+        position: "top",
+        type: "error",
+        title: "Elige fecha solicitada",
+        showConfirmButton: false,
+        timer: 3500
+      });
+        }else{
+          var motivo_oficio = $('#motivo_oficio').val();
+          if(motivo_oficio == ''){
+            swal({
+        position: "top",
+        type: "error",
+        title: "Elige fecha solicitada",
+        showConfirmButton: false,
+        timer: 3500
+      });
+          }else{
+               $("#form_guardar_solicitud").submit();
+              $("#enviar_solicitud").attr("disableb", true);
+            swal({
+        position: "top",
+        type: "success",
+        title: "Registro exitoso",
+        showConfirmButton: false,
+        timer: 3500
+            });
+          }
+        }
+       
+      }else{
+
+      }
+    }
+      
+
+    });
                 
   });
-</script>
-
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script>
-  Swal.fire({
-  position: 'center',
-  icon: 'success',
-  title: 'Tu solicitud de oficio a sido enviada con éxito ',
-  showConfirmButton:true,
-  timer: 1500
-  });
-
 </script>
 </main>
 @endsection
