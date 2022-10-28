@@ -145,10 +145,7 @@
 <div class="row" style="display: inline" id="solicitar">
                 <div class="col-md-2 col-md-offset-4">
 
-                    <button id="guardar_solicitud" type="submit" class="btn btn-success btn-lg">Guardar</button>
-
-
-               
+                    <button id="enviar_solicitud" type="button" class="btn btn-success btn-lg">Guardar</button>
                   </div>
                 <div class="col-md-2 col-md-offset-1">
                     <button id="imprimir_solicitud" type="submit" class="btn btn-success btn-lg">Imprimir</button>
@@ -278,8 +275,10 @@
       
       var id_articulo = $('#id_articulo').val();
      //alert (id_articulo);
-     if(id_articulo == null){
-      swal({
+     if(id_articulo == null)
+     {
+      swal
+      ({
         position: "top",
         type: "error",
         title: "Selecciona articulo",
