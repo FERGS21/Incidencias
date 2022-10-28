@@ -144,7 +144,9 @@
 </form> 
 <div class="row" style="display: inline" id="solicitar">
                 <div class="col-md-2 col-md-offset-4">
+
                     <button id="guardar_solicitud" type="submit" class="btn btn-success btn-lg">Guardar</button>
+
 
                
                   </div>
