@@ -159,6 +159,7 @@
      if(id_articulo == 5){
       $("#articulo_64").css("display", "block");
       $("#articulo_73").css("display", "none");
+      $("#articulo_68").css("display", "none");
      }
       if(id_articulo == 8){
       $("#articulo_73").css("display", "block");
@@ -303,7 +304,7 @@
             swal({
         position: "top",
         type: "error",
-        title: "Elige fecha solicitada",
+        title: "Describe el motivo de la incidencia",
         showConfirmButton: false,
         timer: 3500
       });
@@ -317,15 +318,59 @@
         showConfirmButton: false,
         timer: 3500
             });
-          }
+          } 
         }
-       
       }else{
-
       }
     }
-      
-
+//////Articulo 61//////
+if(id_articulo == null)
+     {
+      swal
+      ({
+        position: "top",
+        type: "error",
+        title: "Selecciona articulo",
+        showConfirmButton: false,
+        timer: 3500
+      });
+     }
+     else{
+      if(id_articulo == 4){
+        var fecha_req = $('#fecha_req').val();
+        if(fecha_req == ''){
+          swal({
+        position: "top",
+        type: "error",
+        title: "Elige fecha solicitada",
+        showConfirmButton: false,
+        timer: 3500
+      });
+        }else{
+          var motivo_oficio = $('#motivo_oficio').val();
+          if(motivo_oficio == ''){
+            swal({
+        position: "top",
+        type: "error",
+        title: "Describe el motivo de la incidencia",
+        showConfirmButton: false,
+        timer: 3500
+      });
+          }else{
+               $("#form_guardar_solicitud").submit();
+              $("#enviar_solicitud").attr("disableb", true);
+            swal({
+        position: "top",
+        type: "success",
+        title: "Registro exitoso",
+        showConfirmButton: false,
+        timer: 3500
+            });
+          } 
+        }
+      }else{
+      }
+    }
     });
                 
   });

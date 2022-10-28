@@ -51,9 +51,19 @@ public function store(Request $request)
             'fecha_req' => $fecha_req,
             'motivo_oficio' => $motivo_oficio,
         ]);
+}else{
+}
+if($id_articulo ==4){
+    $fecha_req = $request->input('fecha_req');
+    $motivo_oficio = $request->input('motivo_oficio');
 
+    DB::table('inc_solicitudes')->insert([
+        'id_articulo' => $id_articulo,
+        'fecha_req' => $fecha_req,
+        'motivo_oficio' => $motivo_oficio,
+    ]);
 
-       }
+}
     }
 
 }
