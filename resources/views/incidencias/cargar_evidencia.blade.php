@@ -20,7 +20,7 @@
         <label> Para poder subir la evidencia correspondiente es necesario que su archivo, que desea subir este en formato PDF y que este legible.</label>
     </div>
 
-    /*<div class="row">
+    <div class="row">
             <div class="col-md-5 col-md-offset-3">
             <div class= "dropdown">
               <label for="Tipo_evi">Tipo de evidencia </label>
@@ -39,18 +39,14 @@
                     <input  class="form-control" accept="application/pdf" type="file" name="archivo" required>
                 </div> 
                 </div> 
-        </div>
-    
-    <div class="row" style="display: inline" id="subir">
+ </form>
+ <div class="row" style="display: inline" id="subir">
                 <br>
                 <div class="col-md-4 col-md-offset-5 m">
                     <button id="subir_evidencia" type="submit" class="btn btn-success btn-lg"> Guardar evidencia</button>
                 </div>
 
             </div>
- </form>
-</div>
-</div>	
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11">
 </script>
 <script>

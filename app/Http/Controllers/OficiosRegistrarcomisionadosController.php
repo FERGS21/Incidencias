@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;                 c
 use Illuminate\Http\Request;
 use App\oc_oficio;
 use App\oc_oficio_personal;
