@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e8a0012e9238fec238dfbcc88cdc7b8f",
+    "content-hash": "43e40a86800f7352047b0757a7efe77c",
     "packages": [
         {
             "name": "anouar/fpdf",
@@ -6725,5 +6725,5 @@
         "php": "^7.1.3"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.2.0"
 }

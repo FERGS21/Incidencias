@@ -1712,11 +1712,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/presupuesto_anteproyecto/agregar_bienes_servicios_ant_admin/{id_actividades_req_ante}','Pre_reg_req_adminController@agregar_bienes_servicios_ant_admin');
     Route::post('/presupuesto_anteproyecto/guardar_autorizacion_req_admin/','Pre_reg_req_adminController@guardar_autorizacion_req_admin');
 
-
+///////incidencias//////
     Route::get('/incidencias/solicitar_oficio','IncidenciasController@vista');
     Route::post('/incidencias/guardar_incidencia_solicitada','IncidenciasController@guardar_incidencia_solicitada');
     Route::get('/incidencias/cargar_evidencia','IncidenciasController@vista2');
     Route::post('/incidencias/guardar_evidencia','IncidenciasController@guardar_evidencia');
+    route::get('/incidencias/editar_evidencia/{maximo}','IncidenciasController@editar_evidencia');
+    Route::get('/incidencias/historial_oficios','IncidenciasController@vista3');
+    Route::get('/incidencias/historial_evidencias','IncidenciasController@vista4');
+    Route::get('/incidencias/validar_oficios','IncidenciasController@vista5');
+    Route::get('/incidencias/modificar_evidencia/{id_evid}','IncidenciasController@modificar_evidencia');
     
     ///
 

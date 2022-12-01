@@ -1440,14 +1440,17 @@
                                    <ul class="dropdown-menu">
                                         <li><a href="{{url('/incidencias/solicitar_oficio')}}">Solicitar oficio</a></li>
                                         <li><a href="{{url('/incidencias/cargar_evidencia')}}">Subir evidencia</a></li>
+                                        <li><a href="{{url('/incidencias/historial_oficios')}}">Historial de oficios enviados</a></li>
+                                        <li><a href="{{url('/incidencias/historial_evidencias')}}">Historial de evidencias enviadas</a></li>
+                                        <li><a href="{{url('/incidencias/validar_oficios')}}">Validar oficios</a></li>
                                     </ul>
                                 </li>
 
-                            </ul>
+                            </ula
 
 
 @endif
-                  </div>
+                  
 
 
               </nav>

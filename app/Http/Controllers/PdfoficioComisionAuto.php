@@ -458,7 +458,7 @@ and gnral_municipios.id_estado=gnral_estados.id_estado and oc_depend_domicilio.i
 
         $fechasalida=($oficios->fecha_salida);
         $fecharegreso=($oficios->fecha_regreso);
-          $horasalida=($oficios->hora_s);
+        $horasalida=($oficios->hora_s);
         $horaregreso=($oficios->hora_r);
         $pdf->Ln(4);
         $pdf->SetFont('Arial','','8');

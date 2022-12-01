@@ -186,7 +186,7 @@ una vez concluida la incapacidad.</label>
       <button id="enviar_solicitud" type="button" class="btn btn-success btn-lg">Guardar</button>
   </div>
   <div class="col-md-2 col-md-offset-1">
-      <button id="imprimir_solicitud" type="submit" class="btn btn-success btn-lg">Imprimir</button>
+      <button id="imprimir_solicitud" type="button" class="btn btn-success btn-lg">Imprimir</button>
   </div>
 </div>
 <script>
@@ -352,6 +352,8 @@ una vez concluida la incapacidad.</label>
                     $('.fecha_tervac').datepicker('setStartDate', getDate(selected));
                 });
 
+    //////Validacion llenado///
+
     $("#enviar_solicitud").click(function(){
 
       var id_articulo = $('#id_articulo').val();
@@ -390,7 +392,7 @@ una vez concluida la incapacidad.</label>
         timer: 3500
       });
           }else{
-               $("#form_guardar_solicitud").submit();
+              $("#form_guardar_solicitud").submit();
               $("#enviar_solicitud").attr("disableb", true);
             swal({
         position: "top",

@@ -14,16 +14,30 @@ class IncidenciasController extends Controller
        // dd($articulos);
         return view('incidencias.agregar', compact('articulos'));
     }
-public function store(Request $request)
+    public function vista2()
     {
-       /* $incidencias = new Incidencias;
-        $incidencias->motivo_oficio = $request->input('motivo_oficio');
-        $incidencias->tipo_articulo = $request-> select('id_articulo');
-        $incidencias->fecha_requerida = $request->select('fecha_req');
-        $incidencias-> save();
-        */
-        Incidencias:: create($request->all());
-        return 'Completado';   
+        $tipo_evidencia= DB::select('SELECT * from inc_tipo_evidencia ORDER by nombre_evidencia ASC');
+         //dd($tipo_evidencia);
+         return view('incidencias.cargar_evidencia', compact ('tipo_evidencia'));
+   
+    }
+    public function vista3(){
+        return view('incidencias.historial_oficio');
+    }
+    public function vista4(){
+        return view('incidencias.historial_evidencias');
+    }
+    public function vista5(){
+        return view('incidencias.validar_oficios');
+    }
+    public function validar_oficios(Request $request){
+
+    }
+    public function historial_oficios(Request $request){
+
+    }
+    public function historial_evidencias(Request $request){
+
     }
     public function guardar_incidencia_solicitada(Request $request){
         //dd($request);
@@ -85,16 +99,14 @@ public function store(Request $request)
                 'hora_s1'=>$hora_s1,
             ]); 
         }else{
-        } 
-
+        }
          /////////art 68 dia economico//////////////
          if($id_articulo ==7){
             $fecha_req=$request->input('fecha_req');
             
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
-                'fecha_req'=>$fecha_req,
-                
+                'fecha_req'=>$fecha_req,    
             ]); 
         }else{
         } 
@@ -109,7 +121,6 @@ public function store(Request $request)
                 'fecha_req'=>$fecha_req,
                 'fecha_invac'=>$fecha_invac,
                 'fecha_tervac'=>$fecha_tervac,
-
             ]); 
         }else{
         } 
@@ -120,7 +131,6 @@ public function store(Request $request)
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
-                
             ]); 
         }else{
         } 
@@ -143,21 +153,41 @@ public function store(Request $request)
 
 
 
-public function vista2()
-    {
-        $tipo_evidencia= DB::select('SELECT * from inc_tipo_evidencia ORDER by nombre_evidencia ASC');
-        return view('incidencias.cargar_evidencia', compact ('tipo_evidencia'));
-    }
-    public function cargar_evidencia(Request $request)
+    public function guardar_evidencia(Request $request)
     { 
-        $id_tipo_evid = $request->input('id_tipo_evid');
-       if($id_tipo_evid ==1){
-        $archivo= $request->input('arch_evidencia');
-     
-        DB::table('inc_evidencias')->insert([
-            'id_evid' => $id_evid,
-            'arch_evidencia' => $archivo,
-        ]);
-}   
+    $maximo= DB::selectOne('select max(id_evid) maximo FROM inc_evidencias'); 
+  
+    if($maximo->maximo==null){
+     $maximo=1;
+    
+    }else{
+        $maximo= $maximo->maximo+1;
     }
+    $file=$request->file('arch_evidencia');
+   
+    $documento=$request->file('arch_evidencia');
+    $id_tipo_evid=$request->input('id_tipo_evid');
+    $name="evidencia_incidencia_".$maximo.".".$file->getClientOriginalExtension();
+    $file->move(public_path().'/incidencias/', $name);
+
+        DB::table('inc_evidencias')->insert([
+            'id_evid'=>$maximo,
+            'id_tipo_evid' => $id_tipo_evid,
+            'arch_evidencia' => $name,  
+        ]);
+     return redirect('/incidencias/editar_evidencia/'.$maximo);
+    }
+    public function editar_evidencia ($maximo){
+    
+    $evidencia= DB::selectOne('select inc_evidencias.*,inc_tipo_evidencia.nombre_evidencia FROM inc_tipo_evidencia, inc_evidencias WHERE inc_evidencias.id_tipo_evid = inc_tipo_evidencia.id_tipo_evid AND inc_evidencias.id_evid='.$maximo);
+    //dd($maximo);
+    return view('incidencias.editar_evidencia',compact ('evidencia'));
 }
+public function modificar_evidencia($id_evid){
+    $evidencia= DB::selectOne('select inc_evidencias.*,inc_tipo_evidencia.nombre_evidencia FROM inc_tipo_evidencia, inc_evidencias WHERE inc_evidencias.id_tipo_evid = inc_tipo_evidencia.id_tipo_evid AND inc_evidencias.id_evid='.$id_evid);
+    $tipo_evidencia= DB::select('SELECT * from inc_tipo_evidencia ORDER by nombre_evidencia ASC');
+    //dd($evidencia);
+    return view('incidencias.partials_mod_evidencia',compact('evidencia','tipo_evidencia'));
+}
+
+    }
