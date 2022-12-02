@@ -31,7 +31,7 @@ class PDF extends FPDF
         }
     }
 }
-class PdfIncidenciaController extends Controller
+class PdfSolicitudIncidenciaController extends Controller
 {
     public function index()
     {
@@ -65,12 +65,7 @@ class PdfIncidenciaController extends Controller
         $pdf->Cell(50,4,utf8_decode('Valle de Bravo, Estado de México;'),0,0,'R');
         }
 
-        
-
-
-
-
-
+ 
   
 //////////////////////////////NO BORRAR//////////
     $pdf->Output();

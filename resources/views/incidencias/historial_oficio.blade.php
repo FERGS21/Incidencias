@@ -22,8 +22,24 @@
                     <th class="text-center">Descripcion del articulo</th>
                     <th class="text-center">Fecha requerida oficio</th>
                     <th class="text-center">Estado de oficio</th>
+                    <th class="text-center">Imprimir</th>
+                </tr>
+                <tr>
+                    <th></th>
+      
+                    <th></th>
+                    <th></th>
+                    <th>
+                        
+                    </th>
+                    <th>
+                        <td> 
+                            <button type="button" class="btn btn-primary center" onclick="window.open('{{url('pdfregistroincidencia')}}')">Imprimir</button>
+                        </td>
+                    </th>
                 </tr>
             </thead>
+
         </table>
     </div>
   </div>
