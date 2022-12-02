@@ -45,7 +45,7 @@
       </div>
 </div>
 <script>
-    $("#enviar_evidencia").click(function(){
+  $("#enviar_evidencia").click(function(){
 
 var id_tipo_evid= $('#id_tipo_evid').val();
 //alert(id_tipo_evid);

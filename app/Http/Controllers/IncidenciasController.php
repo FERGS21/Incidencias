@@ -39,6 +39,19 @@ class IncidenciasController extends Controller
     public function historial_evidencias(Request $request){
 
     }
+    public function guardar_mod_evidencia(Request $request, $id_evid){
+        $documento=$request->file('arch_evidencia');
+        $id_tipo_evid=$request->input('id_tipo_evid');
+        $name="evidencia_incidencia_".$id_evid.".".$documento->getClientOriginalExtension();
+        $documento->move(public_path().'/incidencias/', $name);
+    
+            DB::table('inc_evidencias')->where('id_evid', $id_evid)
+            ->update([
+                'id_tipo_evid' => $id_tipo_evid,
+                'arch_evidencia' => $name,  
+            ]);
+         return redirect('/incidencias/editar_evidencia/'.$id_evid);
+    }
     public function guardar_incidencia_solicitada(Request $request){
         //dd($request);
        $id_articulo = $request->input('id_articulo');

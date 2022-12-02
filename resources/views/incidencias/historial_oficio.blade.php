@@ -21,7 +21,6 @@
                     <th class="text-center">Articulo aplicado</th>
                     <th class="text-center">Descripcion del articulo</th>
                     <th class="text-center">Fecha requerida oficio</th>
-                    <th class="text-center">Ver oficio</th>
                     <th class="text-center">Estado de oficio</th>
                 </tr>
             </thead>

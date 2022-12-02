@@ -1,7 +1,7 @@
-<form id="form_enviar_evidencia" action="{{url("/incidencias/guardar_mod_evidencia")}}" role="form" method="POST" enctype="multipart/form-data">
+<form id="form_enviar_evidencia" action="{{url("/incidencias/guardar_mod_evidencia/".$evidencia->id_evid)}}" role="form" method="POST" enctype="multipart/form-data">
   {{ csrf_field() }}
 <div class="row">
-  <div class="col-md-10 col-md-offset-2">
+  <div class="col-md-10 col-md-offset-1">
     <label>Instrucciones: </label><br>
       <label> Para poder subir la evidencia correspondiente es necesario que su archivo, que desea subir este en formato PDF y que este legible.</label>
   </div>
@@ -23,10 +23,10 @@
     </div>
   </div>
 </div>
-            <div class="row">              
+<div class="row">              
     <div class="col-md-5 col-md-offset-3">
-                    <span><label for="archivo_subir">Archivo a subir:</label>
-                    <input  class="form-control" id="arch_evidencia" name="arch_evidencia" type="file" accept="application/pdf"    required/>
-                </div> 
-                </div> 
+        <span><label for="archivo_subir">Archivo a subir:</label>
+          <input  class="form-control" id="arch_evidencia" name="arch_evidencia" type="file" accept="application/pdf"    required/>
+      </div> 
+    </div> 
  </form>
