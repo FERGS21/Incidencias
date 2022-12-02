@@ -185,8 +185,11 @@ una vez concluida la incapacidad.</label>
   <div class="col-md-2 col-md-offset-4">
       <button id="enviar_solicitud" type="button" class="btn btn-success btn-lg">Guardar</button>
   </div>
-<div class="col-md-2 col-md-offset-1">
-      <button id="imprimir_solicitud" type="button" class="btn btn-success btn-lg">Imprimir</button>
+  <div class="col-md-2 col-md-offset-1">
+    
+  <td> <button type="button" class="btn btn-primary center" onclick="window.open('{{url('pdfregistroincidencia')}}')">Imprimir</button></td>
+    
+      
   </div>
 </div>
 <script>
