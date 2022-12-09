@@ -103,11 +103,15 @@
                             @if($historial->no_oficio == 0)
                             <td>{{$historial->no_oficio}}</td>
                             <td>{{$historial->titulo}} {{$historial->nombre}}</td>
+                            
                             <td>{{$historial->desc_comision}}</td>
+
                             <?php  $fecha_salida=date("d-m-Y ",strtotime($historial->fecha_salida)) ?>
                             <td>{{$fecha_salida}} hora:{{$historial->hora_r }} </td>
+
                             <?php  $fecha_regreso=date("d-m-Y ",strtotime($historial->fecha_regreso)) ?>
                             <td >{{$fecha_regreso}} {{$historial->hora_r }} </td>
+                            
                                 @if($historial->id_lugar_salida == 1)
                                     <td >TESVB  </td>
                                 @elseif($historial->id_lugar_salida == 2)

@@ -24,6 +24,20 @@
                         <th class="text-center">Ver oficio</th>
                         <th class="text-center">Evaluar oficio</th>
                     </tr>
+                    <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                      <td class="text-center">
+                      <button class="btn btn-primary edita" id=""><i class="glyphicon glyphicon-list"></i></button>
+                     </td>
+                    </th>
+                      <td class="text-center">
+                      <button type="button" class="btn btn-info btn-circle" onclick="window.location='{{ url('') }}'" title="Autorizar"><i class="glyphicon glyphicon-ok"></i></button>
+                                        <button type="button" class="btn btn-warning btn-circle" onclick="window.location='{{ url('' ) }}'" title="Rechazar"><i class="glyphicon glyphicon-remove"></i></button>
+                      </td>
+                 
+                    </tr>
                     </thead>
                 </table>
     </div>

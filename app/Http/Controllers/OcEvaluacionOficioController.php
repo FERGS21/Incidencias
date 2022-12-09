@@ -49,12 +49,19 @@ class OcEvaluacionOficioController extends Controller
         $anos_oficios=DB::select('SELECT * FROM oc_anos');
         $oficioss = DB::table('oc_oficio_personal')
             ->join('oc_oficio','oc_oficio.id_oficio','=','oc_oficio_personal.id_oficio')
-            ->join('gnral_personales','oc_oficio_personal.id_personal','=','gnral_personales.id_personal')->join('abreviaciones_prof','abreviaciones_prof.id_personal','=','gnral_personales.id_personal')
+            ->join('gnral_personales','oc_oficio_personal.id_personal','=','gnral_personales.id_personal')
+            ->join('abreviaciones_prof','abreviaciones_prof.id_personal','=','gnral_personales.id_personal')
             ->join('abreviaciones','abreviaciones_prof.id_abreviacion','=','abreviaciones.id_abreviacion')
             ->where('oc_oficio_personal.anio','=',$id_a)
             ->where('oc_oficio_personal.id_notificacion','=',2)
             ->orwhere('oc_oficio_personal.id_notificacion','=',3)
-            ->select('oc_oficio_personal.id_oficio_personal','oc_oficio_personal.no_oficio','oc_oficio_personal.estado_oficio','oc_oficio.hora_s','oc_oficio.hora_r','oc_oficio.fecha_hora','oc_oficio.fecha_salida','oc_oficio.fecha_salida','oc_oficio.fecha_regreso','oc_oficio.id_lugar_salida','oc_oficio.id_lugar_salida','oc_oficio.id_lugar_entrada','oc_oficio.desc_comision','oc_oficio_personal.id_notificacion','oc_oficio_personal.viaticos','oc_oficio_personal.automovil','abreviaciones.titulo','gnral_personales.nombre')
+            ->select('oc_oficio_personal.id_oficio_personal','oc_oficio_personal.no_oficio',
+                    'oc_oficio_personal.estado_oficio','oc_oficio.hora_s','oc_oficio.hora_r',
+                    'oc_oficio.fecha_hora','oc_oficio.fecha_salida','oc_oficio.fecha_salida',
+                    'oc_oficio.fecha_regreso','oc_oficio.id_lugar_salida','oc_oficio.id_lugar_salida',
+                    'oc_oficio.id_lugar_entrada','oc_oficio.desc_comision','oc_oficio_personal.id_notificacion',
+                    'oc_oficio_personal.viaticos','oc_oficio_personal.automovil','abreviaciones.titulo',
+                    'gnral_personales.nombre')
             ->orderBy('oc_oficio.fecha_hora', 'DESC')
             ->get();
         $mostrar=1;

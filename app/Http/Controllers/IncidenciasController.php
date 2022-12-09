@@ -22,7 +22,12 @@ class IncidenciasController extends Controller
    
     }
     public function vista3(){
-        return view('incidencias.historial_oficio');
+
+        $solicitud = DB:: table ('inc_solicitudes')
+        ->join('inc_articulos','inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
+        ->select('inc_solicitudes.*', 'inc_articulos.*')    
+        ->get();
+        return view('incidencias.historial_oficio', compact('solicitud'));
     }
     public function vista4(){
         return view('incidencias.historial_evidencias');
@@ -34,6 +39,8 @@ class IncidenciasController extends Controller
 
     }
     public function historial_oficios(Request $request){
+
+
 
     }
     public function historial_evidencias(Request $request){

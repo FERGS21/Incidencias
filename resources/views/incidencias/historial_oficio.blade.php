@@ -14,33 +14,44 @@
   </div>
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-        <table id="tabla_envio" class="table table-bordered table-resposive">
-            <thead>
-                <tr class="text-center">
-                    <th class="text-center">Numero de oficio</th>
-                    <th class="text-center">Articulo aplicado</th>
-                    <th class="text-center">Descripcion del articulo</th>
-                    <th class="text-center">Fecha requerida oficio</th>
-                    <th class="text-center">Estado de oficio</th>
-                    <th class="text-center">Imprimir</th>
-                </tr>
-                <tr>
-                    <th></th>
-      
-                    <th></th>
-                    <th></th>
-                    <th>
-                        
-                    </th>
-                    <th>
-                        <td> 
-                            <button type="button" class="btn btn-primary center" onclick="window.open('{{url('pdfregistroincidencia')}}')">Imprimir</button>
-                        </td>
-                    </th>
-                </tr>
-            </thead>
-
-        </table>
+    <tbody>
+    <table id="tabla_envio" class="table table-bordered table-resposive">
+                                <thead >                                     
+                                    <th>No.</th> 
+                                    <th>Articulo</th>
+                                    <th> Descripción Articulo </th>
+                                    <th> Fecha requerida</th>
+                                    <th> Ver oficio</th>  
+                                    <th> Estado de oficio</th> 
+                                    <th>Imprimir</th>                        
+                              </thead>
+                              <tbody>
+                            @foreach ($solicitud as $solicita)
+                            <tr>
+                                <td>{{ $solicita->id_solicitud}}</td>
+                                <td> {{$solicita->nombre_articulo}}</td>
+                                <td> 
+                                    @if($solicita->id_articulo==1)
+                                    {{$solicita->descripcion_art}}
+                                    @endif
+                                </td>
+                                <td>
+                                    
+                                    @if($solicita->id_articulo == 1)
+                                        {{$solicita->fecha_req}}
+                                    @elseif($solicita->id_articulo ==2)
+                                        {{$solicita->fecha_req}}
+                                    @endif
+                                
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            @endforeach
+                            
+                            </tbody>
+                        </table>
     </div>
   </div>
   </main>
