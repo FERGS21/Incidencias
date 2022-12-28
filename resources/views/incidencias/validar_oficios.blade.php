@@ -11,7 +11,7 @@
         </div>
     </div>  
   </div>
-  </div>
+</div>
   <form id="form_guardar_solicitud" action="{{url("/incidencias/validar_oficios")}}" method="POST" role="form" >
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -42,6 +42,30 @@
                 </table>
     </div>
   </div>
+//*CONTENEDOR-MODAL*//
+<div class="modal fade" id="modal_mostrar_oficio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-info">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title text-center" id="myModalLabel">DATOS DEL OFICIO</h4>
+                    </div>
+                    <div class="modal-body">
 
+                        <div id="contenedor_mostrar_oficio">
+
+                        </div>
+                    </div> <!-- modal body  -->
+
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
   </main>
+  {{ csrf_field() }}
+  
 @endsection

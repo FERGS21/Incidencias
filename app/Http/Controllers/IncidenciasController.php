@@ -8,12 +8,19 @@ use Redirect;
 
 class IncidenciasController extends Controller
 {
+    
     public function vista()
     {
         $articulos= DB::select('SELECT * from inc_articulos ORDER by nombre_articulo ASC');
        // dd($articulos);
         return view('incidencias.agregar', compact('articulos'));
     }
+    /*public function inicio()
+    {
+        $pagina = App\Incidencias:: paginate(2);
+        return view ('', compact ('pagina'));
+    }*/
+
     public function vista2()
     {
         $tipo_evidencia= DB::select('SELECT * from inc_tipo_evidencia ORDER by nombre_evidencia ASC');
@@ -22,25 +29,46 @@ class IncidenciasController extends Controller
    
     }
     public function vista3(){
-
         $solicitud = DB:: table ('inc_solicitudes')
         ->join('inc_articulos','inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
         ->select('inc_solicitudes.*', 'inc_articulos.*')    
         ->get();
+        /*$usuario=DB:: table('user')*/
+       
         return view('incidencias.historial_oficio', compact('solicitud'));
     }
     public function vista4(){
-        return view('incidencias.historial_evidencias');
+        $evid = DB:: table ('inc_evidencias')
+        ->join('inc_tipo_evidencia','inc_evidencias.id_tipo_evid','=','inc_tipo_evidencia.id_tipo_evid')
+        ->select('inc_evidencias.*', 'inc_tipo_evidencia.*')    
+        ->get();
+        return view('incidencias.historial_evidencias', compact('evid'));
     }
     public function vista5(){
         return view('incidencias.validar_oficios');
+    }
+    public function vista6(){
+        return view('incidencias.historial_docentesSo');
+    }
+    public function vista7(){
+        return view('incidencias.historial_docentesEv');
+    }
+    public function vista8(){
+        return view('incidencias.articulos_evidencia');
+    }
+    public function articulos_evidencia(Request $request){
+
+    }
+    public function historial_docentesSo(Request $request){
+        
+    }
+    public function historial_docentesEv(Request $request){
+
     }
     public function validar_oficios(Request $request){
 
     }
     public function historial_oficios(Request $request){
-
-
 
     }
     public function historial_evidencias(Request $request){
@@ -65,32 +93,41 @@ class IncidenciasController extends Controller
        //////////articulo 56///////////////
         if($id_articulo ==2){
         $fecha_req = $request->input('fecha_req');
-
+        $motivo_oficio = $request->input('motivo_oficio');
+        
+        //$usuario = DB::select("Consulta de usuario logeado");
         DB::table('inc_solicitudes')->insert([
             'id_articulo' => $id_articulo,
-            'fecha_req' => $fecha_req,    
+            'fecha_req' => $fecha_req,
+            'motivo_oficio' => $motivo_oficio,   
         ]);
         }else{
         }
         //////articulo 61///////////////
         if($id_articulo ==4){
             $fecha_req = $request->input('fecha_req');
+            $motivo_oficio = $request->input('motivo_oficio');
+
 
             DB::table('inc_solicitudes')->insert([
                 'id_articulo' => $id_articulo,
                 'fecha_req' => $fecha_req,
+                'motivo_oficio' => $motivo_oficio,
+
             ]);
         }else{
         }
         ////////////////articulo 64/////////////
         if($id_articulo ==5){
             $fecha_req=$request->input('fecha_req');
+            $motivo_oficio = $request->input('motivo_oficio');
             $hora_e=$request->input('hora_e');
             $hora_st=$request->input('hora_st');
 
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
+                'motivo_oficio' => $motivo_oficio,
                 'hora_e'=>$hora_e,
                 'hora_st'=>$hora_st,
             ]); 
@@ -99,22 +136,26 @@ class IncidenciasController extends Controller
         //////art68diaeconomico/////
         if($id_articulo ==6){
             $fecha_req=$request->input('fecha_req');
+            $motivo_oficio = $request->input('motivo_oficio');
 
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
+                'motivo_oficio' => $motivo_oficio,
             ]); 
         }else{
         } 
         /////////art 68 mediass jornadas//////////////
         if($id_articulo ==10){
             $fecha_req=$request->input('fecha_req');
+            $motivo_oficio = $request->input('motivo_oficio');
             $hora_e1=$request->input('hora_e1');
             $hora_s1=$request->input('hora_s1');
 
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
+                'motivo_oficio' => $motivo_oficio,
                 'hora_e1'=>$hora_e1,
                 'hora_s1'=>$hora_s1,
             ]); 
@@ -123,10 +164,12 @@ class IncidenciasController extends Controller
          /////////art 68 dia economico//////////////
          if($id_articulo ==7){
             $fecha_req=$request->input('fecha_req');
+            $motivo_oficio = $request->input('motivo_oficio');
             
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
-                'fecha_req'=>$fecha_req,    
+                'fecha_req'=>$fecha_req,  
+                'motivo_oficio' => $motivo_oficio,  
             ]); 
         }else{
         } 
@@ -135,10 +178,12 @@ class IncidenciasController extends Controller
             $fecha_req=$request->input('fecha_req');
             $fecha_invac=$request->input('fecha_invac');
             $fecha_tervac=$request->input('fecha_tervac');
+            $motivo_oficio = $request->input('motivo_oficio');
             
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
+                'motivo_oficio' => $motivo_oficio,
                 'fecha_invac'=>$fecha_invac,
                 'fecha_tervac'=>$fecha_tervac,
             ]); 
@@ -147,22 +192,25 @@ class IncidenciasController extends Controller
         ////art44 diaeconomico////
         if($id_articulo ==1){
             $fecha_req=$request->input('fecha_req');
-            
+            $motivo_oficio = $request->input('motivo_oficio');
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
+                'motivo_oficio' => $motivo_oficio,
             ]); 
         }else{
         } 
         ///////art 44 medias jornadas////
         if($id_articulo ==9){
             $fecha_req=$request->input('fecha_req');
+            $motivo_oficio = $request->input('motivo_oficio');
             $hora_e2=$request->input('hora_e2');
             $hora_s2=$request->input('hora_s2');
 
             DB::table('inc_solicitudes')->insert([
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
+                'motivo_oficio' => $motivo_oficio,
                 'hora_e2'=>$hora_e2,
                 'hora_s2'=>$hora_s2,
             ]); 
@@ -170,9 +218,6 @@ class IncidenciasController extends Controller
         } 
         return Redirect::to('/incidencias/solicitar_oficio');
         }
-
-
-
     public function guardar_evidencia(Request $request)
     { 
     $maximo= DB::selectOne('select max(id_evid) maximo FROM inc_evidencias'); 

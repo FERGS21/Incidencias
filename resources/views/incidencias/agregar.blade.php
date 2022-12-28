@@ -15,6 +15,16 @@
   <form id="form_guardar_solicitud" action="{{url("/incidencias/guardar_incidencia_solicitada")}}" method="POST" role="form" >
   {{ csrf_field() }}
   <div class="row">
+             <div class="col-md-8 col-md-offset-2">
+                     <div class="form-group">
+                         <label for="motivo_oficio">Motivo del oficio </label>
+                        <textarea class="form-control" id="motivo_oficio" name="motivo_oficio" rows="3" placeholder="Ingresa el motivo del oficio (Utilizar letras mayusculas y minusculas), por ejemplo: Entregar documentación" style=""></textarea>
+
+                     </div>
+             </div>
+             </div>
+                
+  <div class="row">
   <div class="col-md-3 col-md-offset-2">
     <div class= "dropdown">
         <label for="Tipo_of">Tipo de articulo/clausula aplicada </label>
@@ -111,6 +121,17 @@
      </div>
   </div>
 </div>
+{{-------DESCRIPCIÓN ARTICULO 69 OMISIÓN DE ENTRADA------------}}
+<div style="display: none;" id="descripcion_69">
+  <div class="row">
+     <div class="col-md-8 col-md-offset-2">
+        <label for="omisión de salida" >Toda incidencia deberá justificarse ante la Dirección de Administración y Finanzas en el caso del
+personal administrativo y a la Dirección de Académica para el personal docente, en un plazo no mayor a cinco días
+hábiles después de ocurrida; de no respetar el plazo de presentación, esta perderá su carácter de justificable y no
+será autorizada. </label>
+     </div>
+  </div>
+</div>
 {{-------DESCRIPCIÓN CLAUSULA 44 MEDIAS JORNADAS SINDICATO------------}}
 <div style="display: none;" id="descripcionM_44">
   <div class="row">
@@ -182,12 +203,13 @@ una vez concluida la incapacidad.</label>
 </div>
 </form> 
 <div class="row" style="display: inline" id="solicitar">
-  <div class="col-md-2 col-md-offset-4">
+  <div class="col-md-2 col-md-offset-6">
       <button id="enviar_solicitud" type="button" class="btn btn-success btn-lg">Guardar</button>
   </div>
-  <div class="col-md-2 col-md-offset-1">
+  
+  
     
-  <td> <button type="button" class="btn btn-primary center" onclick="window.open('{{url('pdfregistroincidencia')}}')">Imprimir</button></td>
+ 
     
       
   </div>
@@ -208,7 +230,8 @@ una vez concluida la incapacidad.</label>
       $("#descripcionM_68").css("display", "none"); 
       $("#descripcion_56").css("display", "none");  
       $("#descripcion_61").css("display", "none");
-      $("#descripcion_73").css("display", "none");  
+      $("#descripcion_73").css("display", "none"); 
+      $("#descripcion_69").css("display", "none"); 
      }
       if(id_articulo == 8){
       $("#articulo_73").css("display", "block");
@@ -222,7 +245,8 @@ una vez concluida la incapacidad.</label>
       $("#descripcionM_68").css("display", "none"); 
       $("#descripcionD_68").css("display", "none"); 
       $("#descripcionM_44").css("display", "none");
-      $("#descripcionD_44").css("display", "none");  
+      $("#descripcionD_44").css("display", "none"); 
+      $("#descripcion_69").css("display", "none"); 
       }
       if (id_articulo == 1){
         $("#descripcionD_44").css("display", "block");
@@ -235,6 +259,7 @@ una vez concluida la incapacidad.</label>
         $("#descripcion_73").css("display", "none");
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
+        $("#descripcion_69").css("display", "none");
       }
       if (id_articulo == 6){
         $("#descripcionD_68").css("display", "block");
@@ -247,6 +272,7 @@ una vez concluida la incapacidad.</label>
         $("#descripcion_73").css("display", "none");
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
+        $("#descripcion_69").css("display", "none");
       }
       if (id_articulo == 10){
         $("#descripcionM_68").css("display", "block");
@@ -261,6 +287,7 @@ una vez concluida la incapacidad.</label>
         $("#articuloM_44").css("display", "none");
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
+        $("#descripcion_69").css("display", "none");
       }
       if (id_articulo == 9){
         $("#articuloM_44").css("display", "block");
@@ -275,6 +302,7 @@ una vez concluida la incapacidad.</label>
         $("#articuloM_68").css("display", "none");
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
+        $("#descripcion_69").css("display", "none");
       }
       if (id_articulo == 2){
         $("#descripcion_56").css("display", "block");
@@ -285,6 +313,7 @@ una vez concluida la incapacidad.</label>
         $("#descripcion_61").css("display", "none");
         $("#descripcion_64").css("display", "none");
         $("#descripcion_73").css("display", "none");
+        $("#descripcion_69").css("display", "none");
       }
       if(id_articulo==4){
         $("#descripcion_61").css("display", "block");
@@ -295,8 +324,10 @@ una vez concluida la incapacidad.</label>
         $("#descripcion_56").css("display", "none");
         $("#descripcion_64").css("display", "none");
         $("#descripcion_73").css("display", "none");
+        $("#descripcion_69").css("display", "none");
       }
       if(id_articulo == 7){
+        $("#descripcion_69").css("display", "block")
         $("#descripcionM_44").css("display", "none");
         $("#descripcionD_44").css("display", "none");
         $("#descripcionD_68").css("display", "none");
@@ -308,6 +339,7 @@ una vez concluida la incapacidad.</label>
         $("#articuloM_44").css("display", "none");
         $("#articuloM_68").css("display", "none");
       }
+      
     });
    $('#hora_e').pickatime({
                 format: 'HH:i',

@@ -47,7 +47,7 @@
                     <tr>
                         <th>No.</th>
                         <th>Fecha solicitud</th>
-                        <th>Nobre del solicitante de la comisión</th>
+                        <th>Nombre del solicitante de la comisión</th>
                         {{-- <th>Descripción del oficio</th>--}}
                         <th>Permiso de modificación de solicitud</th>
                         <th>Comisionados</th>
@@ -165,7 +165,7 @@
             $('#paginar_table').DataTable( {
 
             } );
-
+5
 
 
 

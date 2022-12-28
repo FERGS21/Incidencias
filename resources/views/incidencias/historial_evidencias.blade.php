@@ -15,16 +15,35 @@
   <form id="form_guardar_solicitud" action="{{url("/incidencias/historial_evidencias")}}" method="POST" role="form" >
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-                <table id="tabla_envio" class="table table-bordered table-resposive">
-                  <thead>
-                    <tr class="text-center">
-                        <th class="text-center">Numero de evidencia</th>
-                        <th class="text-center">Tipo de evidencia</th>
-                        <th class="text-center">Fecha de envio de evidencia</th>
-                        <th class="text-center">Archivo enviado</th>
-                    </tr>
-                  </thead>
-                </table>
+    <table id="tabla_envio" class="table table-bordered table-resposive">
+                                <thead >                                     
+                                    <th>No.</th> 
+                                    <th> Nombre del solicitante</th>
+                                    <th>Tipo de evidencia</th> 
+                                    <th>Fecha de envio de evidencia</th> 
+                                    <th>Ver evidencia</th>                    
+                              </thead>
+                              <tbody>
+                            @foreach ($evid as $evidencia)
+                            <tr>
+
+                                <td>{{$evidencia->id_evid}}</td>
+                                <td></td>
+                                <td>{{$evidencia->nombre_evidencia}}</td>
+                                <td> 
+                                  @if($evidencia->id_evid == $evidencia->id_evid )
+                                      {{$evidencia->fecha_envio}}
+                                  @endif
+                                  <td class="text-center">
+                      <button class="btn btn-primary edita" id=""><i class="glyphicon glyphicon-list"></i></button>
+                     </td>
+                                </td>
+
+                            </tr>
+                            @endforeach
+                            
+                            </tbody>
+                        </table>
     </div>
   </div>
 

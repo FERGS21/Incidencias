@@ -1439,10 +1439,12 @@
                                    class="caret"> </span></a>
                                    <ul class="dropdown-menu">
                                         <li><a href="{{url('/incidencias/solicitar_oficio')}}">Solicitar oficio</a></li>
-                                        <li><a href="{{url('/incidencias/cargar_evidencia')}}">Subir evidencia</a></li>
+                                        <li><a href="{{url('/incidencias/articulos_evidencia')}}">Subir evidencia</a></li>
                                         <li><a href="{{url('/incidencias/historial_oficios')}}">Historial de oficios enviados</a></li>
                                         <li><a href="{{url('/incidencias/historial_evidencias')}}">Historial de evidencias enviadas</a></li>
                                         <li><a href="{{url('/incidencias/validar_oficios')}}">Validar oficios</a></li>
+                                        <li><a href="{{url('/incidencias/historial_docentesSo')}}">Historial oficios Docentes</a></li>
+                                        <li><a href="{{url('/incidencias/historial_docentesEv')}}">Historial evidencias Docentes</a></li> 
                                     </ul>
                                 </li>
 

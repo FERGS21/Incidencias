@@ -24,7 +24,7 @@ class Datos_GeneralesalumnosController extends Controller
         $carrerita=$id_carrera;
         $ver=1;
         $carreras=DB::select('SELECT * FROM gnral_carreras WHERE id_carrera!=9 AND id_carrera!=11 AND id_carrera!=15 ORDER BY id_carrera ');
-
+        
         return view('evaluacion_docente.Alumnos.datos_generales_alumnos',compact('alumnos','carreras','carrerita','ver'));
 
     }

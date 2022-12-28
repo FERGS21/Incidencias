@@ -1723,13 +1723,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/incidencias/validar_oficios','IncidenciasController@vista5');
     Route::get('/incidencias/modificar_evidencia/{id_evid}','IncidenciasController@modificar_evidencia');
     Route::post('/incidencias/guardar_mod_evidencia/{id_evid}','IncidenciasController@guardar_mod_evidencia') ;
-    
+    Route::get('/incidencias/historial_docentesSo','IncidenciasController@vista6');
+    Route::get('/incidencias/historial_docentesEv','IncidenciasController@vista7');
+    Route::get('/incidencias/articulos_evidencia','IncidenciasController@vista8');
     Route::get('pdfregistroincidencia', [
         'as' => 'pdfregistroincidencia',
         'uses' => 'PdfSolicitudIncidenciaContratoController@index1',
     ]);
 
-        
     Route::get('pdfregistroincidencia1', [
         'as' => 'pdfregistroincidencia1',
         'uses' => 'PdfSolicitudIncidenciaContratoController@index2',
