@@ -19,22 +19,32 @@
                             <thead >                                     
                                     <th>No.</th> 
                                     <th>Articulo aplicado</th>
-                                    <th>Descripción Articulo </th>
+                                    <th>Motivo de oficio</th>
                                     <th>Fecha solicitada</th>
-                                    <th>Solicitado a</th>
                                     <th>Estado de oficio</th>
                             </thead>
                             <tbody>
-                         
+                            @foreach ($histSol as $hist)
                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td> </td>
+                            <td>{{$hist->id_solicitud}}</td>
+                            <td>{{$hist->nombre_articulo}}</td>
+                            <td>{{$hist->motivo_oficio}}</td>
+                            <td>{{$hist->fecha_req}}</td>
+                            @if($hist->id_estado_solicitud==1)
+                                <td>Enviado</td>
+                            @endif
+                            @if($hist->id_estado_solicitud==2)
+                                <td>Autorizado</td>
+                            @endif
+                            @if($hist->id_estado_solicitud==3)
+                                <td>Rechazado</td>
+                            @endif
+                            <td>
+                                
+                            </td>
+                            
                         </tr>
-                      
+                        @endforeach
 
 
 </table>

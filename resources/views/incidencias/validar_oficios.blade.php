@@ -42,8 +42,8 @@
                 </table>
     </div>
   </div>
-//*CONTENEDOR-MODAL*//
-<div class="modal fade" id="modal_mostrar_oficio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+//////CONTENEDOR-MODAL
+<div class="modal fade" id="modal_mostrar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header bg-info">
@@ -52,7 +52,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <div id="contenedor_mostrar_oficio">
+                        <div id="contenedor_mostrar">
 
                         </div>
                     </div> <!-- modal body  -->
@@ -67,5 +67,13 @@
         </div>
   </main>
   {{ csrf_field() }}
-  
+  <script type="text/javascript">
+        $(document).ready(function() {
+
+          $.get("/oficios/vercomision/"+idof,function (request) {
+                    $("#contenedor_mostrar").html(request);
+                    $("#modal_mostrar").modal('show');
+                });
+            });
+          
 @endsection

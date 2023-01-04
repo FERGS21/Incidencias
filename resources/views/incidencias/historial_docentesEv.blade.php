@@ -23,6 +23,17 @@
                                     <th>Fecha de envio</th>                       
                               </thead>
                               <tbody>
+                              @foreach ($histEvi as $evidhist)
+                    <tr>
+                        <td>{{$evidhist->id_evid}} </td>
+                        <td>{{$evidhist->nombre_evidencia}}</td>
+                        <td> @if($evidhist->id_evid == $evidhist->id_evid )
+                                      {{$evidhist->fecha_envio}}
+                                  @endif
+                                  <td>
+
+</tr>
+@endforeach
 </table>
 </div>
   </div>

@@ -1735,7 +1735,7 @@ Route::middleware('auth')->group(function () {
         'as' => 'pdfregistroincidencia1',
         'uses' => 'PdfSolicitudIncidenciaContratoController@index2',
     ]);
-
+ 
     ///
 
 });

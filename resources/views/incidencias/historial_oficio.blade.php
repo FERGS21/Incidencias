@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title', 'Incidencias')
 @section('content')
-   
+
 <main class="col-md-12">
     <div class="row"> <form id="form_guardar_solicitud" action="{{url("/incidencias/historial_oficios")}}" method="POST" role="form" >
         <div class="col-md-5 col-md-offset-4">
@@ -135,6 +135,6 @@
                         </table>
     </div>
   </div>
-  </main>
- 
+</main>
+
 @endsection

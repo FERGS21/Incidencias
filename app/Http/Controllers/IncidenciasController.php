@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Redirect;
 
+
+
+
 class IncidenciasController extends Controller
 {
     
@@ -33,9 +36,9 @@ class IncidenciasController extends Controller
         ->join('inc_articulos','inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
         ->select('inc_solicitudes.*', 'inc_articulos.*')    
         ->get();
-        /*$usuario=DB:: table('user')*/
-       
         return view('incidencias.historial_oficio', compact('solicitud'));
+        /*$usuario=DB:: table('user')*/
+        
     }
     public function vista4(){
         $evid = DB:: table ('inc_evidencias')
@@ -48,10 +51,18 @@ class IncidenciasController extends Controller
         return view('incidencias.validar_oficios');
     }
     public function vista6(){
-        return view('incidencias.historial_docentesSo');
+        $histSol = DB:: table ('inc_solicitudes')
+        ->join ('inc_articulos', 'inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
+        ->select('inc_solicitudes.*', 'inc_articulos.*')
+        ->get();
+        return view('incidencias.historial_docentesSo', compact ('histSol'));
     }
     public function vista7(){
-        return view('incidencias.historial_docentesEv');
+        $histEvi = DB:: table ('inc_evidencias')
+        ->join ('inc_tipo_evidencia', 'inc_evidencias.id_tipo_evid','=','inc_tipo_evidencia.id_tipo_evid')
+        ->select('inc_evidencias.*', 'inc_tipo_evidencia.*')
+        ->get();
+        return view('incidencias.historial_docentesEv', compact ('histEvi'));
     }
     public function vista8(){
         return view('incidencias.articulos_evidencia');
@@ -69,10 +80,14 @@ class IncidenciasController extends Controller
 
     }
     public function historial_oficios(Request $request){
-
+    
     }
     public function historial_evidencias(Request $request){
 
+    }
+    public function index(){
+        $historial = DB::table('inc_solicitudes')->paginate(10);
+        return view ('inc_solicitudes.index',['historial'=> $historial]);
     }
     public function guardar_mod_evidencia(Request $request, $id_evid){
         $documento=$request->file('arch_evidencia');
