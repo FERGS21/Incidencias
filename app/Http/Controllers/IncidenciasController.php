@@ -311,7 +311,7 @@ class IncidenciasController extends Controller
             ]); 
         }else{
         } 
-        return Redirect::to('/incidencias/solicitar_oficio');
+        return Redirect::to('/incidencias/historial_docentesSo');
         }
     public function guardar_evidencia(Request $request)
     { 

@@ -91,9 +91,9 @@
                                         <button class="btn btn-primary edita" id="{{$ofic->id_oficio_personal}}"><i class="glyphicon glyphicon-list"></i></button>
                                     </td>
                                     <td class="text-center">
-                                        <button type="button" class="btn btn-info btn-circle" onclick="window.location='{{ url('/oficios/aceptadosubdireccion/'.$ofic->id_oficio_personal ) }}'" title="Autorizar"><i class="glyphicon glyphicon-ok"></i></button>
-                                        <button type="button" class="btn btn-warning btn-circle" onclick="window.location='{{ url('/oficios/rechazadosubdireccion/'.$ofic->id_oficio_personal ) }}'" title="Rechazar"><i class="glyphicon glyphicon-remove"></i></button>
-                                    </td>
+                                        <button type="button" class="btn btn-info btn-circle" onclick="window.location='{{ url('/oficios/aceptadosubdireccion/',$ofic->id_oficio_personal ) }}'" title="Autorizar"><i class="glyphicon glyphicon-ok"></i></button>
+                                        <button type="button" class="btn btn-warning btn-circle" onclick="window.location='{{ url('/oficios/rechazadosubdireccion',$ofic->id_oficio_personal ) }}'" title="Rechazar"><i class="glyphicon glyphicon-remove"></i></button>
+                                    </td>                                                                                   
                                 </tr>
                             @endforeach
                         @endforeach

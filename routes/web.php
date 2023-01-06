@@ -1736,6 +1736,5 @@ Route::middleware('auth')->group(function () {
         'uses' => 'PdfSolicitudIncidenciaContratoController@index2',
     ]);
  
-    ///
 
 });
