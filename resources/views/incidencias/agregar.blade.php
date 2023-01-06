@@ -25,9 +25,10 @@
              </div>
                 
   <div class="row">
-  <div class="col-md-3 col-md-offset-2">
+  <div class="col-md-3 col-md-offset-1">
     <div class= "dropdown">
         <label for="Tipo_of">Tipo de articulo/clausula aplicada </label>
+        <input type="hidden" id="estado_profesor" name="estado_profesor" value="{{$estado_profesor}}">
         <select class="form-control" placeholder="Seleciona una opción" id="id_articulo" name="id_articulo" required>
               <option disabled selected hidden> Selecciona una opción </option>
                 @foreach($articulos as $articulo)
@@ -36,14 +37,24 @@
              </select>
               </div>
             </div>
-            <div class="col-md-3 col-md-offset-2">
+            <div class="col-md-2 col-md-offset-1">
     <label for="fecha_req">Fecha requerida</label>
                      <div class="form-group">
                          <input class="form-control datepicker fecha_req"   type="text"  id="fecha_req" name="fecha_req" data-date-format="yyyy/mm/dd" placeholder="AAAA/MM/DD" >
                      </div>
                      </div>
             </div>
-
+            <div class="col-md-3 col-md-offset-1" id="jefes" style="display:none;">
+                        <div class="dropdown">
+                            <label for="exampleInputEmail1">Dirigido a </label>
+                            <select class="form-control" placeholder="Seleciona una opción" id="id_jefe" name="id_jefe" required>
+              <option disabled selected hidden> Selecciona una opción </option>
+                @foreach($array_carreras as $carrera)
+                <option value="{{$carrera['id_personal']}}" data-art="{{$carrera['nombre']}}">{{$carrera['nombre']}}</option>
+                @endforeach
+             </select>
+                        </div>
+                    </div>
             {{-----------ARTICULO 64°-----------}}
 <div style="display: none;" id="articulo_64">
 <div class="row">
@@ -204,7 +215,7 @@ una vez concluida la incapacidad.</label>
 </form> 
 <div class="row" style="display: inline" id="solicitar">
   <div class="col-md-2 col-md-offset-6">
-      <button id="enviar_solicitud" type="button" class="btn btn-success btn-lg">Guardar</button>
+      <button id="enviar_solicitud" type="button" class="btn btn-success btn-lg">Enviar</button>
   </div>
   
   
@@ -218,6 +229,7 @@ una vez concluida la incapacidad.</label>
    $(document).ready( function() {
    $("#id_articulo").change(function(){
     var id_articulo=$(this).val();
+    //alert('hola');
      if(id_articulo == 5){
       $("#articulo_64").css("display", "block");
       $("#articulo_73").css("display", "none");
@@ -231,7 +243,15 @@ una vez concluida la incapacidad.</label>
       $("#descripcion_56").css("display", "none");  
       $("#descripcion_61").css("display", "none");
       $("#descripcion_73").css("display", "none"); 
-      $("#descripcion_69").css("display", "none"); 
+      $("#descripcion_69").css("display", "none");
+      var id_estado_prof="<?php echo $estado_profesor;?>";
+      if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
+     
+      //alert('hola');
+      
      }
       if(id_articulo == 8){
       $("#articulo_73").css("display", "block");
@@ -260,6 +280,11 @@ una vez concluida la incapacidad.</label>
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
         $("#descripcion_69").css("display", "none");
+        var id_estado_prof="<?php echo $estado_profesor;?>";
+      if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
       }
       if (id_articulo == 6){
         $("#descripcionD_68").css("display", "block");
@@ -273,6 +298,11 @@ una vez concluida la incapacidad.</label>
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
         $("#descripcion_69").css("display", "none");
+        var id_estado_prof="<?php echo $estado_profesor;?>";
+      if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
       }
       if (id_articulo == 10){
         $("#descripcionM_68").css("display", "block");
@@ -288,6 +318,11 @@ una vez concluida la incapacidad.</label>
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
         $("#descripcion_69").css("display", "none");
+        var id_estado_prof="<?php echo $estado_profesor;?>";
+      if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
       }
       if (id_articulo == 9){
         $("#articuloM_44").css("display", "block");
@@ -303,6 +338,11 @@ una vez concluida la incapacidad.</label>
         $("#articulo_64").css("display", "none");
         $("#articulo_73").css("display", "none");
         $("#descripcion_69").css("display", "none");
+        var id_estado_prof="<?php echo $estado_profesor;?>";
+        if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
       }
       if (id_articulo == 2){
         $("#descripcion_56").css("display", "block");
@@ -314,6 +354,11 @@ una vez concluida la incapacidad.</label>
         $("#descripcion_64").css("display", "none");
         $("#descripcion_73").css("display", "none");
         $("#descripcion_69").css("display", "none");
+        var id_estado_prof="<?php echo $estado_profesor;?>";
+      if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
       }
       if(id_articulo==4){
         $("#descripcion_61").css("display", "block");
@@ -325,6 +370,11 @@ una vez concluida la incapacidad.</label>
         $("#descripcion_64").css("display", "none");
         $("#descripcion_73").css("display", "none");
         $("#descripcion_69").css("display", "none");
+        var id_estado_prof="<?php echo $estado_profesor;?>";
+        if(id_estado_prof==1){
+         $("#jefes").css("display", "block");
+
+      }
       }
       if(id_articulo == 7){
         $("#descripcion_69").css("display", "block")
@@ -815,4 +865,3 @@ if(id_articulo == null)
 </script>
 </main>
 @endsection
-

@@ -5,6 +5,7 @@ use App\Incidencias;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Redirect;
+use Session;
 
 
 
@@ -16,14 +17,40 @@ class IncidenciasController extends Controller
     {
         $articulos= DB::select('SELECT * from inc_articulos ORDER by nombre_articulo ASC');
        // dd($articulos);
-        return view('incidencias.agregar', compact('articulos'));
-    }
-    /*public function inicio()
-    {
-        $pagina = App\Incidencias:: paginate(2);
-        return view ('', compact ('pagina'));
-    }*/
+       $id_usuario = Session::get('usuario_alumno');
+       $id_personal = DB::SelectOne('SELECT * FROM `gnral_personales` WHERE tipo_usuario='.$id_usuario.'');
+       $id_personal = $id_personal->id_personal;
+        $id_periodo = Session::get('periodotrabaja');
+        $estado_profesor = DB::SelectOne('SELECT COUNT(gnral_personales.id_personal) contar 
+        from gnral_personales, gnral_horarios, gnral_periodo_carreras WHERE 
+        gnral_horarios.id_personal = gnral_personales.id_personal AND 
+        gnral_horarios.id_periodo_carrera = gnral_periodo_carreras.id_periodo_carrera AND gnral_personales.id_personal = '.$id_personal.' 
+        AND gnral_periodo_carreras.id_periodo = '.$id_periodo.'');
+        if($estado_profesor->contar == 0){
+            $estado_profesor=0;
+            $array_carreras=0;
+        }else{
+            $estado_profesor=1;
+            $carreras = DB::Select('SELECT gnral_periodo_carreras.id_carrera
+            from gnral_personales, gnral_horarios, gnral_periodo_carreras WHERE 
+            gnral_horarios.id_personal = gnral_personales.id_personal AND 
+            gnral_horarios.id_periodo_carrera = gnral_periodo_carreras.id_periodo_carrera AND gnral_personales.id_personal='.$id_personal.' 
+            AND gnral_periodo_carreras.id_periodo ='.$id_periodo.'');
+            $array_carreras=array();
+            
+            foreach($carreras as $carrera){
+                $nombre_jefe=DB::SelectOne('SELECT gnral_personales.id_personal,gnral_personales.nombre 
+                FROM gnral_personales, gnral_jefes_periodos WHERE gnral_jefes_periodos.id_personal=gnral_personales.id_personal 
+                AND gnral_jefes_periodos.id_carrera='.$carrera->id_carrera.' and gnral_jefes_periodos.id_periodo='.$id_periodo.'');
+            $dat['id_personal']=$nombre_jefe->id_personal;
+            $dat['nombre']=$nombre_jefe->nombre;
+            array_push($array_carreras, $dat);
+            }
 
+        }
+    return view('incidencias.agregar', compact('articulos', 'estado_profesor', 'array_carreras'));
+    }
+    
     public function vista2()
     {
         $tipo_evidencia= DB::select('SELECT * from inc_tipo_evidencia ORDER by nombre_evidencia ASC');
@@ -48,7 +75,14 @@ class IncidenciasController extends Controller
         return view('incidencias.historial_evidencias', compact('evid'));
     }
     public function vista5(){
-        return view('incidencias.validar_oficios');
+        $solicitudes = DB:: table ('inc_solicitudes')
+        ->join('inc_articulos','inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
+        ->join('gnral_personales','inc_solicitudes.id_personal','=','gnral_personales.id_personal')
+        ->select('inc_solicitudes.*', 'inc_articulos.*', 'gnral_personales.*')    
+        ->get();
+        $oficio=DB::selectOne('SELECT COUNT(inc_solicitudes.id_solicitud) ofc from inc_solicitudes where  inc_solicitudes.id_estado_solicitud=1');
+        $oficio=$oficio->ofc;
+       return view('incidencias.validar_oficios', compact('solicitudes'))->with(['oficio'=>$oficio]);
     }
     public function vista6(){
         $histSol = DB:: table ('inc_solicitudes')
@@ -104,7 +138,27 @@ class IncidenciasController extends Controller
     }
     public function guardar_incidencia_solicitada(Request $request){
         //dd($request);
+        $id_usuario = Session::get('usuario_alumno');
+        $id_personal = DB::SelectOne('SELECT * FROM `gnral_personales` WHERE tipo_usuario='.$id_usuario.'');
+        $id_personal = $id_personal->id_personal;
+        $id_estado_solicitud="1";
+        
+        //dd($estado_profesor);
        $id_articulo = $request->input('id_articulo');
+       $estado_profesor = $request->input('estado_profesor');
+       if($estado_profesor==0){
+        $id_pers = DB::SelectOne('SELECT id_personal FROM `adscripcion_personal` WHERE id_personal='.$id_personal.'');
+        $id_jefe= DB::SelectOne('SELECT * FROM `gnral_unidad_personal` WHERE `id_unidad_persona` ='.$id_pers->id_unidad_persona.'') ;
+        $id_jefe_finan = DB::SelectOne('SELECT * FROM `gnral_unidad_personal` WHERE `id_unidad_admin` = 22 '); 
+        $id_jefe_a=$id_jefe_finan->id_personal;
+        $id_jefe=$id_jefe->id_personal;
+       }
+       else{
+        $id_jefe_academ = DB::SelectOne('SELECT * FROM `gnral_unidad_personal` WHERE `id_unidad_admin` = 22 '); 
+        $id_jefe_a=$id_jefe_academ->id_personal;
+        $id_jefe = $request->input('id_jefe');
+        
+       }
        //////////articulo 56///////////////
         if($id_articulo ==2){
         $fecha_req = $request->input('fecha_req');
@@ -114,7 +168,10 @@ class IncidenciasController extends Controller
         DB::table('inc_solicitudes')->insert([
             'id_articulo' => $id_articulo,
             'fecha_req' => $fecha_req,
-            'motivo_oficio' => $motivo_oficio,   
+            'motivo_oficio' => $motivo_oficio,  
+            'id_personal' =>$id_personal,
+            'id_jefe' =>$id_jefe,
+            'id_estado_solicitud'=>$id_estado_solicitud,
         ]);
         }else{
         }
@@ -128,7 +185,8 @@ class IncidenciasController extends Controller
                 'id_articulo' => $id_articulo,
                 'fecha_req' => $fecha_req,
                 'motivo_oficio' => $motivo_oficio,
-
+                'id_personal' =>$id_personal,
+                'id_estado_solicitud'=>$id_estado_solicitud,
             ]);
         }else{
         }
@@ -145,6 +203,9 @@ class IncidenciasController extends Controller
                 'motivo_oficio' => $motivo_oficio,
                 'hora_e'=>$hora_e,
                 'hora_st'=>$hora_st,
+                'id_personal' =>$id_personal,
+                'id_jefe' =>$id_jefe,
+                'id_estado_solicitud'=>$id_estado_solicitud,
             ]); 
         }else{
         } 
@@ -157,6 +218,9 @@ class IncidenciasController extends Controller
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
                 'motivo_oficio' => $motivo_oficio,
+                'id_personal' =>$id_personal,
+                'id_jefe' =>$id_jefe,
+                'id_estado_solicitud'=>$id_estado_solicitud,
             ]); 
         }else{
         } 
@@ -173,6 +237,10 @@ class IncidenciasController extends Controller
                 'motivo_oficio' => $motivo_oficio,
                 'hora_e1'=>$hora_e1,
                 'hora_s1'=>$hora_s1,
+                'id_personal' =>$id_personal,
+                'id_jefe' =>$id_jefe,
+                'id_estado_solicitud'=>$id_estado_solicitud,
+                
             ]); 
         }else{
         }
@@ -185,6 +253,9 @@ class IncidenciasController extends Controller
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,  
                 'motivo_oficio' => $motivo_oficio,  
+                'id_personal' =>$id_personal,
+                'id_jefe' =>$id_jefe_a,
+                'id_estado_solicitud'=>$id_estado_solicitud,
             ]); 
         }else{
         } 
@@ -201,6 +272,8 @@ class IncidenciasController extends Controller
                 'motivo_oficio' => $motivo_oficio,
                 'fecha_invac'=>$fecha_invac,
                 'fecha_tervac'=>$fecha_tervac,
+                'id_personal' =>$id_personal,
+                'id_estado_solicitud'=>$id_estado_solicitud,
             ]); 
         }else{
         } 
@@ -212,6 +285,9 @@ class IncidenciasController extends Controller
                 'id_articulo'=>$id_articulo,
                 'fecha_req'=>$fecha_req,
                 'motivo_oficio' => $motivo_oficio,
+                'id_personal' =>$id_personal,
+                'id_jefe' =>$id_jefe,
+                'id_estado_solicitud'=>$id_estado_solicitud,
             ]); 
         }else{
         } 
@@ -228,6 +304,10 @@ class IncidenciasController extends Controller
                 'motivo_oficio' => $motivo_oficio,
                 'hora_e2'=>$hora_e2,
                 'hora_s2'=>$hora_s2,
+                'id_personal' =>$id_personal,
+                'id_jefe' =>$id_jefe,
+                'id_estado_solicitud'=>$id_estado_solicitud,
+                //////a
             ]); 
         }else{
         } 
@@ -269,5 +349,79 @@ public function modificar_evidencia($id_evid){
     //dd($evidencia);
     return view('incidencias.partials_mod_evidencia',compact('evidencia','tipo_evidencia'));
 }
+public function consultar_jefes(){
+    $id_usuario = Session::get('usuario_alumno');
+    $id_personal = DB::SelectOne('SELECT * FROM `gnral_personales` WHERE tipo_usuario='.$id_usuario.'');
+    $id_personal = $id_personal->id_personal;
+    $id_periodo = Session::get('periodotrabaja');
+    $carreras = DB::Select('SELECT gnral_periodo_carreras.id_carrera
+    from gnral_personales, gnral_horarios, gnral_periodo_carreras WHERE 
+    gnral_horarios.id_personal = gnral_personales.id_personal AND 
+    gnral_horarios.id_periodo_carrera = gnral_periodo_carreras.id_periodo_carrera AND gnral_personales.id_personal='.$id_personal.' 
+    AND gnral_periodo_carreras.id_periodo ='.$id_periodo.'');
+    $array_carreras=array();
+    
+    foreach($carreras as $carrera){
+        $nombre_jefe=DB::SelectOne('SELECT gnral_personales.id_personal,gnral_personales.nombre 
+        FROM gnral_personales, gnral_jefes_periodos WHERE gnral_jefes_periodos.id_personal=gnral_personales.id_personal 
+        AND gnral_jefes_periodos.id_carrera='.$carrera->id_carrera.' and gnral_jefes_periodos.id_periodo='.$id_periodo.'');
+    $dat['id_personal']=$nombre_jefe->id_personal;
+    $dat['nombre']=$nombre_jefe->nombre;
+    array_push($array_carreras, $dat);
+    }
+    return $array_carreras;
+    
+
+}
+public function aceptadojefe($id_solicitud_oficio){
+    dd($id_solicitud_oficio);
+}
+/*
+public function aceptado($id_oficio){
+    //estado de la solicitud de  oficio aceptado
+    $usuario= DB::selectOne('SELECT  oc_oficio.id_usuario FROM oc_oficio_personal,oc_oficio WHERE oc_oficio.id_oficio=oc_oficio_personal.id_oficio and oc_oficio_personal.id_oficio_personal='.$id_oficio.'');
+   $usuario=$usuario->id_usuario;
+
+    $anio=date("Y");
+    $numero= DB::selectOne('SELECT MAX(oc_oficio_personal.no_oficio) numero FROM oc_oficio_personal WHERE anio='.$anio.'');
+    $numero=$numero->numero;
+    if($numero==0)
+    {
+        $numeross=1;
+        DB::update('UPDATE oc_oficio_personal SET id_notificacion = 2,no_oficio='.$numeross.' WHERE oc_oficio_personal.id_oficio_personal = '.$id_oficio.'');
+    }
+    else
+    {
+        $numeross=$numero+1;
+        DB::update('UPDATE oc_oficio_personal SET id_notificacion = 2,no_oficio='.$numeross.' WHERE oc_oficio_personal.id_oficio_personal = '.$id_oficio.'');
+
+    }
+
+    DB:: table('oc_notificacion')->insert(['id_usuario'=>$usuario,'id_oficio_personal'=>$id_oficio]);
+
+
+
+
+    return redirect('/oficios/evaluacion');
+}*/
+public function rechazadojefe($id_solicitud_oficio){
+    dd($id_solicitud_oficio);
+}
+/*
+public function rechazado($id_oficio){
+    $usuario= DB::selectOne('SELECT  oc_oficio.id_usuario FROM oc_oficio_personal,oc_oficio WHERE oc_oficio.id_oficio=oc_oficio_personal.id_oficio and oc_oficio_personal.id_oficio_personal='.$id_oficio.'');
+    $usuario=$usuario->id_usuario;
+    $auto=DB::selectOne('SELECT oc_oficio_personal.automovil from oc_oficio_personal WHERE oc_oficio_personal.id_oficio_personal='.$id_oficio.'');
+    $auto=$auto->automovil;
+    if ($auto == 2){
+        DB::update('UPDATE oc_oficio_vehiculo SET notificacion =1 WHERE oc_oficio_vehiculo.id_oficio_personal  = '.$id_oficio.'');
+
+
+    }
+
+    DB::update('UPDATE oc_oficio_personal SET id_notificacion = 3,estado_oficio=1 WHERE oc_oficio_personal.id_oficio_personal  = '.$id_oficio.'');
+    DB:: table('oc_notificacion')->insert(['id_usuario'=>$usuario,'id_oficio_personal'=>$id_oficio]);
+    return redirect('/oficios/evaluacion');
+}*/
 
     }

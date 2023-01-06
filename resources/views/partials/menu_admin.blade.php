@@ -752,17 +752,6 @@
                                     </ul>
                                 </li>
                             </ul>
-                            <ul class="nav navbar-nav navbar-left">
-                                <li class="dropdown bloqueo">
-                                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                   aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
-                                   class="caret"> </span></a>
-                                   <ul class="dropdown-menu">
-                                        <li><a href="{{url('/incidencia/subir_oficio')}}">Ver oficio</a></li>
-                                    </ul>
-                                </li>
-
-                            </ul>
                             <ul class="nav navbar-nav navbar-left tres">
                                 <li class="dropdown">
                                     <a class="dropdown-toogle" href="" data-toggle="dropdown" role="button"
@@ -1430,25 +1419,33 @@
 
                                           </ul>
                                    @endif
-<?php   $personal_tesvb=Session::get('personal_tesvb');?>
-@if( $personal_tesvb == true)
-                                   <ul class="nav navbar-nav navbar-left">
+                    <!--Incidencias-->
+                    <?php   $personal_tesvb=Session::get('personal_tesvb');?>
+                        @if( $personal_tesvb == true)
+                            <ul class="nav navbar-nav navbar-left">
                                 <li class="dropdown bloqueo">
                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                    aria-hapopup="true" aria-expanded="false"> Incidencias de Asistencia <span 
                                    class="caret"> </span></a>
                                    <ul class="dropdown-menu">
+                                        @if($profesor_conact==true || $profesor_sinact==true)
                                         <li><a href="{{url('/incidencias/solicitar_oficio')}}">Solicitar oficio</a></li>
                                         <li><a href="{{url('/incidencias/articulos_evidencia')}}">Subir evidencia</a></li>
+                                        <li><a href="{{url('/incidencias/historial_docentesSo')}}">Historial oficios Docentes</a></li>
+                                        <li><a href="{{url('/incidencias/historial_docentesEv')}}">Historial evidencias Docentes</a></li>
+                                        @endif
+                                        @if($jefe_personal==true)
                                         <li><a href="{{url('/incidencias/historial_oficios')}}">Historial de oficios enviados</a></li>
                                         <li><a href="{{url('/incidencias/historial_evidencias')}}">Historial de evidencias enviadas</a></li>
+                                        @endif
+                                        @if($jefe_division==true || $directivo==true)
                                         <li><a href="{{url('/incidencias/validar_oficios')}}">Validar oficios</a></li>
-                                        <li><a href="{{url('/incidencias/historial_docentesSo')}}">Historial oficios Docentes</a></li>
-                                        <li><a href="{{url('/incidencias/historial_docentesEv')}}">Historial evidencias Docentes</a></li> 
+                                        @endif
+
                                     </ul>
                                 </li>
 
-                            </ula
+                            </ul>
 
 
 @endif
