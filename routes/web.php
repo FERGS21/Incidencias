@@ -1721,6 +1721,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/incidencias/historial_oficios','IncidenciasController@vista3');
     Route::get('/incidencias/historial_evidencias','IncidenciasController@vista4');
     Route::get('/incidencias/validar_oficios','IncidenciasController@vista5');
+    Route::get('/incidencias/validar_oficios/historial','IncidenciasController@validacion_historial');
     Route::get('/incidencias/modificar_evidencia/{id_evid}','IncidenciasController@modificar_evidencia');
     Route::post('/incidencias/guardar_mod_evidencia/{id_evid}','IncidenciasController@guardar_mod_evidencia') ;
     Route::get('/incidencias/historial_docentesSo','IncidenciasController@vista6');
@@ -1735,6 +1736,8 @@ Route::middleware('auth')->group(function () {
         'as' => 'pdfregistroincidencia1',
         'uses' => 'PdfSolicitudIncidenciaContratoController@index2',
     ]);
- 
+    Route::get('/incidencias/historial_docentesSo/oficio/aceptado/{id_solicitud}', 'IncidenciasController@aceptadojefe');
+    Route::get('/incidencias/historial_docentesSo/oficio/rechazado/{id_solicitud}', 'IncidenciasController@rechazadojefe');
+    Route::get('/incidencias/historial_docentesSo/ver_oficio/{id_solicitud}', 'IncidenciasController@ver_solicitud');
 
 });

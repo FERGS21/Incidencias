@@ -80,9 +80,7 @@ class IncidenciasController extends Controller
         ->join('gnral_personales','inc_solicitudes.id_personal','=','gnral_personales.id_personal')
         ->select('inc_solicitudes.*', 'inc_articulos.*', 'gnral_personales.*')    
         ->get();
-        $oficio=DB::selectOne('SELECT COUNT(inc_solicitudes.id_solicitud) ofc from inc_solicitudes where  inc_solicitudes.id_estado_solicitud=1');
-        $oficio=$oficio->ofc;
-       return view('incidencias.validar_oficios', compact('solicitudes'))->with(['oficio'=>$oficio]);
+       return view('incidencias.validar_oficios', compact('solicitudes'));
     }
     public function vista6(){
         $histSol = DB:: table ('inc_solicitudes')
@@ -349,6 +347,15 @@ public function modificar_evidencia($id_evid){
     //dd($evidencia);
     return view('incidencias.partials_mod_evidencia',compact('evidencia','tipo_evidencia'));
 }
+public function ver_solicitud($id_solicitud){
+    $solicitud= DB::selectOne('select inc_solicitudes.*,inc_articulos.nombre_articulo 
+                               FROM inc_solicitudes, inc_articulos 
+                               WHERE inc_solicitudes.id_articulo = inc_articulos.id_articulo AND inc_solicitudes.id_solicitud='.$id_solicitud);
+        dd($solicitud);
+    
+    return view('incidencias.partials_mod_solicitud');
+    
+}
 public function consultar_jefes(){
     $id_usuario = Session::get('usuario_alumno');
     $id_personal = DB::SelectOne('SELECT * FROM `gnral_personales` WHERE tipo_usuario='.$id_usuario.'');
@@ -374,54 +381,20 @@ public function consultar_jefes(){
 
 }
 public function aceptadojefe($id_solicitud_oficio){
-    dd($id_solicitud_oficio);
+    DB::update('UPDATE `inc_solicitudes` SET `id_estado_solicitud` = 2 WHERE `inc_solicitudes`.`id_solicitud` = '.$id_solicitud_oficio.'');
+    return redirect('/incidencias/validar_oficios');
 }
-/*
-public function aceptado($id_oficio){
-    //estado de la solicitud de  oficio aceptado
-    $usuario= DB::selectOne('SELECT  oc_oficio.id_usuario FROM oc_oficio_personal,oc_oficio WHERE oc_oficio.id_oficio=oc_oficio_personal.id_oficio and oc_oficio_personal.id_oficio_personal='.$id_oficio.'');
-   $usuario=$usuario->id_usuario;
-
-    $anio=date("Y");
-    $numero= DB::selectOne('SELECT MAX(oc_oficio_personal.no_oficio) numero FROM oc_oficio_personal WHERE anio='.$anio.'');
-    $numero=$numero->numero;
-    if($numero==0)
-    {
-        $numeross=1;
-        DB::update('UPDATE oc_oficio_personal SET id_notificacion = 2,no_oficio='.$numeross.' WHERE oc_oficio_personal.id_oficio_personal = '.$id_oficio.'');
-    }
-    else
-    {
-        $numeross=$numero+1;
-        DB::update('UPDATE oc_oficio_personal SET id_notificacion = 2,no_oficio='.$numeross.' WHERE oc_oficio_personal.id_oficio_personal = '.$id_oficio.'');
-
-    }
-
-    DB:: table('oc_notificacion')->insert(['id_usuario'=>$usuario,'id_oficio_personal'=>$id_oficio]);
-
-
-
-
-    return redirect('/oficios/evaluacion');
-}*/
 public function rechazadojefe($id_solicitud_oficio){
-    dd($id_solicitud_oficio);
+    DB::update('UPDATE `inc_solicitudes` SET `id_estado_solicitud` = 3 WHERE `inc_solicitudes`.`id_solicitud` = '.$id_solicitud_oficio.'');
+    return redirect('/incidencias/validar_oficios');
 }
-/*
-public function rechazado($id_oficio){
-    $usuario= DB::selectOne('SELECT  oc_oficio.id_usuario FROM oc_oficio_personal,oc_oficio WHERE oc_oficio.id_oficio=oc_oficio_personal.id_oficio and oc_oficio_personal.id_oficio_personal='.$id_oficio.'');
-    $usuario=$usuario->id_usuario;
-    $auto=DB::selectOne('SELECT oc_oficio_personal.automovil from oc_oficio_personal WHERE oc_oficio_personal.id_oficio_personal='.$id_oficio.'');
-    $auto=$auto->automovil;
-    if ($auto == 2){
-        DB::update('UPDATE oc_oficio_vehiculo SET notificacion =1 WHERE oc_oficio_vehiculo.id_oficio_personal  = '.$id_oficio.'');
-
-
-    }
-
-    DB::update('UPDATE oc_oficio_personal SET id_notificacion = 3,estado_oficio=1 WHERE oc_oficio_personal.id_oficio_personal  = '.$id_oficio.'');
-    DB:: table('oc_notificacion')->insert(['id_usuario'=>$usuario,'id_oficio_personal'=>$id_oficio]);
-    return redirect('/oficios/evaluacion');
-}*/
+public function validacion_historial(){
+    $solicitudes = DB:: table ('inc_solicitudes')
+    ->join('inc_articulos','inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
+    ->join('gnral_personales','inc_solicitudes.id_personal','=','gnral_personales.id_personal')
+    ->select('inc_solicitudes.*', 'inc_articulos.*', 'gnral_personales.*')    
+    ->get();
+    return view('incidencias.validacion_historial',compact('solicitudes'));
+}
 
     }

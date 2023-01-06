@@ -20,6 +20,7 @@
     <div class="col-md-5 col-md-offset-4">
           <a  target="_blank" href="/incidencias/{{$evidencia->arch_evidencia}}" class="btn btn-primary"> <i class=" glyphicon glyphicon-book em128" title="Ver PDF"> </i> Ver evidencia </a>
           <button id="{{$evidencia->id_evid}}" class="btn btn-primary editar_evid"> Editar </button>
+          <button id="{{$evidencia->id_evid}}" class="btn btn-primary ver_solicitud"> solicitar </button>
         </div>  
     </div>  
     </div>  
@@ -46,16 +47,18 @@
             </div>
         </div>
 
-     <script>
+<script>
 $(document).ready(function(){
-  $(".editar_evid").click(function(){
+  //modal para evidencia
+  $(".ver_solicitud").click(function(){
         //alert("HOLA");
-    var id_evid = $(this).attr('id');
-    $.get("/incidencias/modificar_evidencia/"+id_evid,function(request){
+    var id_soli = $(this).attr('id');
+    $.get("/incidencias/modificar_evidencia/"+id_soli,function(request){
     $("#contenedor_editar").html(request);
     $("#modal_editar").modal('show');
     });
   }); 
+
   $("#guardar_mod").click(function(){
 
 var id_tipo_evid= $('#id_tipo_evid').val();

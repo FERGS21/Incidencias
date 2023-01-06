@@ -30,6 +30,7 @@
                             <td>{{$hist->nombre_articulo}}</td>
                             <td>{{$hist->motivo_oficio}}</td>
                             <td>{{$hist->fecha_req}}</td>
+                            <!--
                             @if($hist->id_estado_solicitud==1)
                                 <td>Enviado</td>
                             @endif
@@ -38,9 +39,9 @@
                             @endif
                             @if($hist->id_estado_solicitud==3)
                                 <td>Rechazado</td>
-                            @endif
+                            @endif-->
                             <td>
-                                
+                             <button id="{{$hist->id_solicitud}}" class="btn btn-primary ver_solicitud"> Ver solicitud </button>
                             </td>
                             
                         </tr>
@@ -50,7 +51,42 @@
 </table>
 </div>
 </div>
-  </main>
+<div class="modal fade" id="modal_ver" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header bg-info">
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title text-center" id="myModalLabel">EDITAR EVIDENCIA</h4>
+        </div>
+      <div class="modal-body">
+    <div id="contenedor_ver">
+            </div>
+                </div> <!-- modal body  -->
+                    <div class="modal-footer">
+                    
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                       
+                        <button type="button" id="guardar_mod"class="btn btn-primary" >Guardar</button>
+                   </div>
+ 
+                </div>
+            </div>
+</div>
+
+<script>
+$(document).ready(function(){
+      //modal para evidencia
+    $(".ver_solicitud").click(function(){
+        //alert("HOLA");
+    var id_solicitud = $(this).attr('id');
+    $.get("/incidencias/historial_docentesSo/ver_oficio/"+id_solicitud,function(request){
+    $("#contenedor_ver").html(request);
+    $("#modal_ver").modal('show');
+    });
+  }); 
+});   
+</script>
+</main>
 
 
 @endsection
