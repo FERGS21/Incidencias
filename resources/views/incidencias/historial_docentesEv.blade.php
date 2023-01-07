@@ -15,31 +15,31 @@
 
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
-    <tbody>
-    <table id="tabla_historial_docentes" class="table table-bordered table-resposive" align="center">
-                                <thead >                                     
-                                    <th>No.</th> 
-                                    <th>Evidencia aplicada</th>
-                                    <th>Fecha de envio</th>                       
-                              </thead>
-                              <tbody>
-                              @foreach ($histEvi as $evidhist)
+        <table id="tabla_historial_docentes" class="table table-bordered table-resposive" align="center">
+                <thead >                                     
+                    <th>No.</th> 
+                    <th>Evidencia aplicada</th>
+                    <th>Fecha de envio</th>    
+                    <th>Ver evidencia</th>                   
+                </thead>
+                <tbody>
+                @foreach ($histEvi as $evidhist)
                     <tr>
                         <td>{{$evidhist->id_evid}} </td>
                         <td>{{$evidhist->nombre_evidencia}}</td>
                         <td> @if($evidhist->id_evid == $evidhist->id_evid )
                                       {{$evidhist->fecha_envio}}
                                   @endif
-                                  <td>
+                        </td>
+                        <th>
+                            <a  target="_blank" href="{{$evidhist->arch_evidencia}}" class="btn btn-primary"> <i class=" glyphicon glyphicon-book em128" title="Ver PDF"> </i> Ver evidencia </a>
+                        </th>
 
-</tr>
-@endforeach
-</table>
-</div>
+                    </tr>
+                @endforeach
+            <tbody>
+        </table>
+    </div>
   </div>
-
-
-  </main>
-
-
+</main>
 @endsection

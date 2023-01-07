@@ -71,7 +71,8 @@ class IncidenciasController extends Controller
     public function vista4(){
         $evid = DB:: table ('inc_evidencias')
         ->join('inc_tipo_evidencia','inc_evidencias.id_tipo_evid','=','inc_tipo_evidencia.id_tipo_evid')
-        ->select('inc_evidencias.*', 'inc_tipo_evidencia.*')    
+        ->join('gnral_personales','inc_evidencias.id_personal','=','gnral_personales.id_personal')
+        ->select('inc_evidencias.*', 'inc_tipo_evidencia.*','gnral_personales.*')    
         ->get();
         return view('incidencias.historial_evidencias', compact('evid'));
     }
@@ -95,7 +96,8 @@ class IncidenciasController extends Controller
         ->join ('inc_tipo_evidencia', 'inc_evidencias.id_tipo_evid','=','inc_tipo_evidencia.id_tipo_evid')
         ->select('inc_evidencias.*', 'inc_tipo_evidencia.*')
         ->get();
-        return view('incidencias.historial_docentesEv', compact ('histEvi'));
+ 
+        return view('incidencias.historial_docentesEv', compact ('histEvi','evidencia'));
     }
     public function vista8(){
         return view('incidencias.articulos_evidencia');
@@ -127,11 +129,16 @@ class IncidenciasController extends Controller
         $id_tipo_evid=$request->input('id_tipo_evid');
         $name="evidencia_incidencia_".$id_evid.".".$documento->getClientOriginalExtension();
         $documento->move(public_path().'/incidencias/', $name);
+
+        $id_usuario = Session::get('usuario_alumno');
+        $id_personal = DB::SelectOne('SELECT * FROM `gnral_personales` WHERE tipo_usuario='.$id_usuario.'');
+        $id_personal = $id_personal->id_personal;
     
             DB::table('inc_evidencias')->where('id_evid', $id_evid)
             ->update([
                 'id_tipo_evid' => $id_tipo_evid,
                 'arch_evidencia' => $name,  
+                'id_personal' =>$id_personal,
             ]);
          return redirect('/incidencias/editar_evidencia/'.$id_evid);
     }

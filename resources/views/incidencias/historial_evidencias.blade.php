@@ -16,33 +16,31 @@
   <div class="row">
     <div class="col-md-8 col-md-offset-2">
     <table id="tabla_envio" class="table table-bordered table-resposive">
-                                <thead >                                     
-                                    <th>No.</th> 
-                                    <th> Nombre del solicitante</th>
-                                    <th>Tipo de evidencia</th> 
-                                    <th>Fecha de envio de evidencia</th> 
-                                    <th>Ver evidencia</th>                    
-                              </thead>
-                              <tbody>
+                          <thead >                                     
+                            <th>No.</th> 
+                            <th> Nombre del solicitante</th>
+                            <th>Tipo de evidencia</th> 
+                            <th>Fecha de envio de evidencia</th> 
+                            <th>Ver evidencia</th>                    
+                          </thead>
+                          <tbody>
                             @foreach ($evid as $evidencia)
-                            <tr>
+                              <tr>
 
                                 <td>{{$evidencia->id_evid}}</td>
-                                <td></td>
+                                <td>{{$evidencia->nombre}}</td>
                                 <td>{{$evidencia->nombre_evidencia}}</td>
                                 <td> 
                                   @if($evidencia->id_evid == $evidencia->id_evid )
                                       {{$evidencia->fecha_envio}}
                                   @endif
-                                  <td class="text-center">
-                      <button class="btn btn-primary edita" id=""><i class="glyphicon glyphicon-list"></i></button>
-                     </td>
                                 </td>
-
-                            </tr>
+                                <th>
+                                  <a  target="_blank" href="{{$evidencia->arch_evidencia}}" class="btn btn-primary"> <i class=" glyphicon glyphicon-book em128" title="Ver PDF"> </i> Ver evidencia </a>
+                                </th>
+                              </tr>
                             @endforeach
-                           
-                            </tbody>
+                          </tbody>
                         </table>
     </div>
   </div>
