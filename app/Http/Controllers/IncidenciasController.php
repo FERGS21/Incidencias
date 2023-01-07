@@ -61,7 +61,8 @@ class IncidenciasController extends Controller
     public function vista3(){
         $solicitud = DB:: table ('inc_solicitudes')
         ->join('inc_articulos','inc_solicitudes.id_articulo','=','inc_articulos.id_articulo')
-        ->select('inc_solicitudes.*', 'inc_articulos.*')    
+        ->join('gnral_personales','inc_solicitudes.id_personal','=','gnral_personales.id_personal')
+        ->select('inc_solicitudes.*', 'inc_articulos.*', 'gnral_personales.*')    
         ->get();
         return view('incidencias.historial_oficio', compact('solicitud'));
         /*$usuario=DB:: table('user')*/

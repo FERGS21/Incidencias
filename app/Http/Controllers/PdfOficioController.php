@@ -48,6 +48,7 @@ class PdfOficioController extends Controller
         $pdf->SetLineWidth(0.2);
         $pdf->SetFont('Arial','','8');
         $pdf->Cell(40);
+        $etiqueta=DB::selectOne('SELECT * FROM etiqueta WHERE id_etiqueta = 1 ');
         $pdf->Cell(100,5,utf8_decode($etiqueta->descripcion),0,0,'C');
         $pdf->Ln(5);
         $pdf->SetFont('Arial','B','11');

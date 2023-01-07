@@ -1727,12 +1727,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/incidencias/historial_docentesSo','IncidenciasController@vista6');
     Route::get('/incidencias/historial_docentesEv','IncidenciasController@vista7');
     Route::get('/incidencias/articulos_evidencia','IncidenciasController@vista8');
-    Route::get('pdfregistroincidencia', [
+    
+    Route::get('pdfregistroincidencia/{id_solicitud}', [
         'as' => 'pdfregistroincidencia',
         'uses' => 'PdfSolicitudIncidenciaContratoController@index1',
     ]);
-
-    Route::get('pdfregistroincidencia1', [
+    Route::get('pdfregistroincidencia1/{id_solicitud}', [
         'as' => 'pdfregistroincidencia1',
         'uses' => 'PdfSolicitudIncidenciaContratoController@index2',
     ]);
