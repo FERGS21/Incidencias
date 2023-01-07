@@ -1738,6 +1738,6 @@ Route::middleware('auth')->group(function () {
     ]);
     Route::get('/incidencias/historial_docentesSo/oficio/aceptado/{id_solicitud}', 'IncidenciasController@aceptadojefe');
     Route::get('/incidencias/historial_docentesSo/oficio/rechazado/{id_solicitud}', 'IncidenciasController@rechazadojefe');
-    Route::get('/incidencias/historial_docentesSo/ver_oficio/{id_solicitud}', 'IncidenciasController@ver_solicitud');
+    Route::get('/oficios/ver/{id_oficio}', 'IncidenciasController@ver');
 
 });

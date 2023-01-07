@@ -347,15 +347,8 @@ public function modificar_evidencia($id_evid){
     //dd($evidencia);
     return view('incidencias.partials_mod_evidencia',compact('evidencia','tipo_evidencia'));
 }
-public function ver_solicitud($id_solicitud){
-    $solicitud= DB::selectOne('select inc_solicitudes.*,inc_articulos.nombre_articulo 
-                               FROM inc_solicitudes, inc_articulos 
-                               WHERE inc_solicitudes.id_articulo = inc_articulos.id_articulo AND inc_solicitudes.id_solicitud='.$id_solicitud);
-        dd($solicitud);
-    
-    return view('incidencias.partials_mod_solicitud');
-    
-}
+
+
 public function consultar_jefes(){
     $id_usuario = Session::get('usuario_alumno');
     $id_personal = DB::SelectOne('SELECT * FROM `gnral_personales` WHERE tipo_usuario='.$id_usuario.'');
@@ -396,5 +389,13 @@ public function validacion_historial(){
     ->get();
     return view('incidencias.validacion_historial',compact('solicitudes'));
 }
+public function ver($id_oficio){
+    //mostar la solicitud por comisionado
 
-    }
+    $oficios=DB::selectOne('select gnral_personales.nombre, inc_solicitudes.motivo_oficio, inc_articulos.descripcion_art, inc_articulos.nombre_articulo 
+    FROM inc_solicitudes, inc_articulos, gnral_personales
+    WHERE inc_solicitudes.id_personal=gnral_personales.id_personal and inc_solicitudes.id_articulo=inc_articulos.id_articulo and id_solicitud='.$id_oficio.'');
+    //dd($oficios);
+    return view('incidencias.modal_ver',compact('oficios'));
+}
+}
